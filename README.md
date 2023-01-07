@@ -1,3 +1,14 @@
+# ELKS Moria
+This fork repository is to port UMoria 5.6 to ELKS and just started.
+ELKS is the Embeddable Linux Kernel Subset in the following repository.
+https://github.com/jbruchon/elks
+
+The code size is limitted to 128KB, and the data segment size is limitted to 64KB,
+so some shrink is needed.
+
+The following text is the README of the original repository.
+
+----------------------------------------------------------------------
 # UMoria
 Official source code of the roguelike UMoria.
 
