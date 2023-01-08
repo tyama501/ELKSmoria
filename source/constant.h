@@ -64,8 +64,13 @@ some of the system defines set up there.
 #define MAX_SAVE_MSG   22   /* How many messages to save -CJS- */
 
 /* Dungeon size parameters					*/
+#ifdef ELKS
+#define MAX_HEIGHT  22	    /* Multiple of 11; >= 22 */
+#define MAX_WIDTH  66	  /* Multiple of 33; >= 66 */
+#else
 #define MAX_HEIGHT  66	    /* Multiple of 11; >= 22 */
 #define MAX_WIDTH  198	  /* Multiple of 33; >= 66 */
+#endif
 #define SCREEN_HEIGHT  22
 #define SCREEN_WIDTH   66
 #define QUART_HEIGHT (SCREEN_HEIGHT / 4)

@@ -528,7 +528,9 @@ void dungeon()
 #if defined(MSDOS) || defined(VMS)
 	  && kbhit()
 #else
+#ifndef ELKS
 	  && (check_input (find_flag ? 0 : 10000))
+#endif
 #endif
 	  )
 	{

@@ -133,7 +133,7 @@ static void kingly(void);
 
 #ifndef VMS
 #ifndef MAC
-#if !defined(ATARIST_MWC) && !defined(AMIGA)
+#if !defined(ATARIST_MWC) && !defined(AMIGA) && !defined(ELKS)
 long time();
 #endif
 #endif
@@ -146,13 +146,21 @@ char *day;
 #ifdef MAC
   time_t clockvar;
 #else
+#ifdef ELKS
+  time_t clockvar;
+#else
   long clockvar;
+#endif
 #endif
 
 #ifdef MAC
   clockvar = time((time_t *) 0);
 #else
+#ifdef ELKS
+  clockvar = time((time_t *) 0);
+#else
   clockvar = time((long *) 0);
+#endif
 #endif
   tmp = ctime(&clockvar);
   tmp[10] = '\0';

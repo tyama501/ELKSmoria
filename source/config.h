@@ -41,7 +41,7 @@ some of the system defines set up here.
 
 /* If compiling on Debian (also works on other versions of Linux), 
    define this. */
-#define DEBIAN_LINUX
+/* #define DEBIAN_LINUX */
 
 /* If you are compiling on an ultrix/4.2BSD/Dynix/etc. version of UNIX,
    define this.  It is not needed for SUNs.  */
@@ -82,6 +82,11 @@ some of the system defines set up here.
 #ifdef M_XENIX
 #define SYS_V
 #define unix
+#endif
+
+/* For ELKS */
+#ifdef ELKS
+#define SYS_V
 #endif
 
 /* If on HP-UX, define the name as we use it. */

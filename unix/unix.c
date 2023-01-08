@@ -23,7 +23,11 @@
 /* defines CTRL */
 #include <sys/ioctl.h>
 /* defines TRUE and FALSE */
+#ifdef ELKS
+#include "curses.h"
+#else
 #include <ncurses.h>
+#endif
 
 #include "config.h"
 #include "constant.h"

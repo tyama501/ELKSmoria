@@ -38,7 +38,7 @@
 #endif
 #endif
 
-#if !defined(ATARIST_MWC) && !defined(MAC) && !defined(VMS) && !defined(AMIGA)
+#if !defined(ATARIST_MWC) && !defined(MAC) && !defined(VMS) && !defined(AMIGA) && !defined(ELKS)
 long time();
 #endif
 struct tm *localtime();
@@ -58,7 +58,11 @@ int32u seed;
 #ifdef MAC
     clock_var = time((time_t *)0);
 #else
+#ifdef ELKS
+    clock_var = time((time_t *)0);
+#else
     clock_var = time((long *)0);
+#endif
 #endif
   else
     clock_var = seed;
@@ -105,7 +109,11 @@ int check_time()
 #ifdef MAC
   clock_var = time((time_t *)0);
 #else
+#ifdef ELKS
+  clock_var = time((time_t *)0);
+#else
   clock_var = time((long *)0);
+#endif
 #endif
   tp = localtime(&clock_var);
   if (days[tp->tm_wday][tp->tm_hour+4] == 'X')

@@ -55,7 +55,11 @@ char *_procname = "Moria";
 #include <scrnmgr.h>
 #endif
 #else
+#ifdef ELKS
+#include "curses.h"
+#else
 #include <ncurses.h>
+#endif
 #endif
 #else	/* GEMDOS i.e. Atari ST */
 #include "curses.h"
@@ -68,7 +72,6 @@ long wgetch();
 #endif
 char *getenv();
 #endif
-
 
 #include <ctype.h>
 
@@ -131,6 +134,10 @@ typedef struct { int stuff; } fpvmach;
 
 #ifdef DEBIAN_LINUX
 #include <termios.h>
+#else
+#ifdef ELKS
+#include <termios.h>
+#endif
 #endif
 
 #if defined(unix) || defined(__linux__) || defined(DEBIAN_LINUX)
@@ -218,7 +225,11 @@ void sleep();
 #ifdef __linux__
 static struct termios save_termio;
 #else
+#ifdef ELKS
+static struct termios save_termio;
+#else
 static struct termio save_termio;
+#endif
 #endif
 #else
 static struct ltchars save_special_chars;
@@ -562,7 +573,11 @@ void restore_term()
   pause_line(15);
 #endif
   /* this moves curses to bottom right corner */
+#ifdef ELKS
+  mvcur(((WINDOW *) stdscr)->_cury, ((WINDOW *) stdscr)->_curx, LINES-1, 0);
+#else
   mvcur(stdscr->_cury, stdscr->_curx, LINES-1, 0);
+#endif
   endwin();  /* exit curses */
   (void) fflush (stdout);
 #ifdef MSDOS
@@ -1025,8 +1040,10 @@ void flush()
      the happened especially often when rlogin from BSD to SYS_V machine,
      using check_input makes the desired effect a bit clearer */
   /* wierd things happen on EOF, don't try to flush input in that case */
+#ifndef ELKS
   if (!eof_flag)
     while (check_input(0));
+#endif
 #endif
 #endif
 
@@ -1171,6 +1188,7 @@ int col;
 
   row -= panel_row_prt;/* Real co-ords convert to screen positions */
   col -= panel_col_prt;
+#ifndef ELKS
   if (move (row, col) == ERR)
     {
       abort();
@@ -1184,6 +1202,7 @@ int col;
       /* wait so user can see error */
       (void) sleep(2);
     }
+#endif
 }
 #endif
 

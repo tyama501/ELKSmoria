@@ -282,7 +282,9 @@ void init_signals()
 #else
   /* Everybody except the atari st.  */
   (void) MSIGNAL(SIGINT, signal_handler);
+#ifndef ELKS
   (void) MSIGNAL(SIGFPE, signal_handler);
+#endif
 
 #if defined(MSDOS)
   /* many fewer signals under MSDOS */
@@ -302,9 +304,11 @@ void init_signals()
   /* Ignore HANGUP, and let the EOF code take care of this case. */
   (void) MSIGNAL(SIGHUP, SIG_IGN);
   (void) MSIGNAL(SIGQUIT, signal_handler);
+#ifndef ELKS
   (void) MSIGNAL(SIGILL, signal_handler);
   (void) MSIGNAL(SIGTRAP, signal_handler);
   (void) MSIGNAL(SIGIOT, signal_handler);
+#endif
 #ifdef SIGEMT  /* in BSD systems */
   (void) MSIGNAL(SIGEMT, signal_handler);
 #endif
@@ -312,7 +316,9 @@ void init_signals()
   (void) MSIGNAL(SIGDANGER, signal_handler);
 #endif
   (void) MSIGNAL(SIGKILL, signal_handler);
+#ifndef ELKS
   (void) MSIGNAL(SIGBUS, signal_handler);
+#endif
   (void) MSIGNAL(SIGSEGV, signal_handler);
 #ifdef SIGSYS
   (void) MSIGNAL(SIGSYS, signal_handler);

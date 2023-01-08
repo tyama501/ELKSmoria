@@ -96,6 +96,7 @@
 #include <time.h>
 #endif
 
+#ifndef ELKS
 #ifndef VMS
 #ifndef MAC
 #ifndef GEMDOS
@@ -104,6 +105,7 @@ long time();
 #endif
 #endif
 char *getenv();
+#endif
 #endif
 #endif
 
@@ -371,7 +373,11 @@ char *argv[];
 #ifdef MAC
       birth_date = time ((time_t *)0);
 #else
+#ifdef ELKS
+      birth_date = time ((time_t *)0);
+#else
       birth_date = time ((long *)0);
+#endif
 #endif
       char_inven_init();
       py.flags.food = 7500;
