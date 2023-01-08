@@ -1,0 +1,42 @@
+#BASEDIR=..
+BASEDIR=./elks_repository/elkscmd
+
+#include $(BASEDIR)/Make.defs
+
+# To use medium model
+include ./Make.defs
+
+###############################################################################
+#
+# Include standard packaging commands.
+
+include $(BASEDIR)/Make.rules
+
+###############################################################################
+
+PRGS = moria_e
+
+#PRGS_HOST =
+
+CFLAGS += -DELKS=1
+
+#TUILIB = tty.o runes.o unikey.o
+TUILIB = tty.o unikey.o
+
+OBJS = main.o misc1.o misc2.o misc3.o misc4.o store1.o files.o io.o \
+	create.o desc.o generate.o sets.o dungeon.o creature.o death.o \
+	eat.o help.o magic.o potions.o prayer.o save.o staffs.o wands.o \
+	scrolls.o spells.o wizard.o store2.o signals.o moria1.o moria2.o \
+	moria3.o moria4.o monsters.o treasure.o variable.o rnd.o recall.o \
+	unix.o player.o tables.o
+
+all: $(PRGS) $(PRGS_HOST)
+
+moria_e: $(OBJS) curses.o curses2.o $(TUILIB)
+	$(LD) $(LDFLAGS) -maout-heap=0xffff -o $@ $^ $(LDLIBS)
+
+install: $(PRGS)
+	$(INSTALL) $(PRGS) $(DESTDIR)/bin
+
+clean:
+	rm -f $(PRGS) $(PRGS_HOST) *~ *.o
