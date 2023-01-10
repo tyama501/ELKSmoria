@@ -44,6 +44,7 @@ long atol();
 /* Light up the dungeon					-RAK-	*/
 void wizard_light()
 {
+#ifndef ELKS
   register cave_type *c_ptr;
   register int k, l, i, j;
   int flag;
@@ -64,12 +65,14 @@ void wizard_light()
 		c_ptr->fm = FALSE;
 	    }
   prt_map();
+#endif
 }
 
 
 /* Wizard routine for gaining on stats			-RAK-	*/
 void change_character()
 {
+#ifndef ELKS
   register int tmp_val;
   register int32 tmp_lval;
   int8u *a_ptr;
@@ -297,12 +300,14 @@ void change_character()
 	break;
       prt_speed();
     }
+#endif
 }
 
 
 /* Wizard routine for creating objects			-RAK-	*/
 void wizard_create()
 {
+#ifndef ELKS
   register int tmp_val;
   int32 tmp_lval;
   vtype tmp_str;
@@ -424,4 +429,5 @@ void wizard_create()
     }
   else
     msg_print("Aborted.");
+#endif
 }
