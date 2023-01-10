@@ -27,6 +27,7 @@
 /* Throw a magic spell					-RAK-	*/
 void cast()
 {
+#ifndef ELKS_WARRIOR
   int i, j, item_val, dir;
   int choice, chance, result;
   register struct flags *f_ptr;
@@ -225,4 +226,5 @@ void cast()
 	    }
 	}
     }
+#endif
 }

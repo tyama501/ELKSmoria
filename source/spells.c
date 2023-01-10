@@ -79,6 +79,7 @@ int y, x;
   vtype out_val, m_name;
 
   sleep = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = y-1; i <= y+1; i++)
     for (j = x-1; j <= x+1; j++)
       {
@@ -106,6 +107,7 @@ int y, x;
 	      }
 	  }
       }
+#endif
   return(sleep);
 }
 
@@ -116,6 +118,7 @@ int detect_treasure()
   register cave_type *c_ptr;
 
   detect = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = panel_row_min; i <= panel_row_max; i++)
     for (j = panel_col_min; j <= panel_col_max; j++)
       {
@@ -128,6 +131,7 @@ int detect_treasure()
 	    detect = TRUE;
 	  }
       }
+#endif
   return(detect);
 }
 
@@ -139,6 +143,7 @@ int detect_object()
   register cave_type *c_ptr;
 
   detect = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = panel_row_min; i <= panel_row_max; i++)
     for (j = panel_col_min; j <= panel_col_max; j++)
       {
@@ -151,6 +156,7 @@ int detect_object()
 	    detect = TRUE;
 	  }
       }
+#endif
   return(detect);
 }
 
@@ -164,6 +170,7 @@ int detect_trap()
   register inven_type *t_ptr;
 
   detect = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = panel_row_min; i <= panel_row_max; i++)
     for (j = panel_col_min; j <= panel_col_max; j++)
       {
@@ -181,6 +188,7 @@ int detect_trap()
 	      known2(t_ptr);
 	    }
       }
+#endif
   return(detect);
 }
 
@@ -192,6 +200,7 @@ int detect_sdoor()
   register cave_type *c_ptr;
 
   detect = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = panel_row_min; i <= panel_row_max; i++)
     for (j = panel_col_min; j <= panel_col_max; j++)
       {
@@ -214,6 +223,7 @@ int detect_sdoor()
 	      detect = TRUE;
 	    }
       }
+#endif
   return(detect);
 }
 
@@ -228,6 +238,7 @@ int detect_invisible()
 #endif
 
   flag = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -252,6 +263,7 @@ int detect_invisible()
       /* must unlight every monster just lighted */
       creatures(FALSE);
     }
+#endif
   return(flag);
 }
 
@@ -263,6 +275,7 @@ register int y, x;
 {
   register int i, j, light;
 
+#ifndef ELKS_WARRIOR
   if (py.flags.blind < 1)
     msg_print("You are surrounded by a white light.");
   light = TRUE;
@@ -276,6 +289,9 @@ register int y, x;
 	cave[i][j].pl = TRUE;
 	lite_spot(i, j);
       }
+#else
+  light = FALSE;
+#endif
   return(light);
 }
 
@@ -290,6 +306,7 @@ int y, x;
   register cave_type *c_ptr;
 
   unlight = FALSE;
+#ifndef ELKS_WARRIOR
   if (cave[y][x].lr && (dun_level > 0))
     {
       tmp1 = (SCREEN_HEIGHT/2);
@@ -329,7 +346,7 @@ int y, x;
 
   if (unlight && py.flags.blind <= 0)
     msg_print("Darkness surrounds you.");
-
+#endif
   return(unlight);
 }
 
@@ -337,6 +354,7 @@ int y, x;
 /* Map the current area plus some			-RAK-	*/
 void map_area()
 {
+#ifndef ELKS_WARRIOR
   register cave_type *c_ptr;
   register int i7, i8, n, m;
   int i, j, k, l;
@@ -360,6 +378,7 @@ void map_area()
 		c_ptr->fm = TRUE;
 	    }
   prt_map();
+#endif
 }
 
 
@@ -372,6 +391,7 @@ int ident_spell()
   register inven_type *i_ptr;
 
   ident = FALSE;
+#ifndef ELKS_WARRIOR
   if (get_item(&item_val, "Item you wish identified?", 0, INVEN_ARRAY_SIZE,
 	       CNIL, CNIL))
     {
@@ -389,6 +409,7 @@ int ident_spell()
 	(void) sprintf(out_val, "%c %s", item_val+97, tmp_str);
       msg_print(out_val);
     }
+#endif
   return(ident);
 }
 
@@ -401,6 +422,7 @@ int dis_affect;
   register monster_type *m_ptr;
 
   aggravate = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -413,6 +435,7 @@ int dis_affect;
     }
   if (aggravate)
     msg_print ("You hear a sudden stirring in the distance!");
+#endif
   return(aggravate);
 }
 
@@ -423,6 +446,7 @@ int trap_creation()
   register int i, j, trap;
   register cave_type *c_ptr;
 
+#ifndef ELKS_WARRIOR
   trap = TRUE;
   for (i = char_row-1; i <= char_row+1; i++)
     for (j = char_col-1; j <= char_col+1; j++)
@@ -445,6 +469,9 @@ int trap_creation()
 	    lite_spot(i, j);
 	  }
       }
+#else
+  trap = FALSE;
+#endif
   return(trap);
 }
 
@@ -457,6 +484,7 @@ int door_creation()
   register cave_type *c_ptr;
 
   door = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = char_row-1; i <= char_row+1; i++)
     for (j = char_col-1; j <=  char_col+1; j++)
       if ((i != char_row) || (j != char_col))
@@ -474,6 +502,7 @@ int door_creation()
 	      lite_spot(i, j);
 	    }
 	}
+#endif
   return(door);
 }
 
@@ -485,6 +514,7 @@ int td_destroy()
   register cave_type *c_ptr;
 
   destroy = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = char_row-1; i <= char_row+1; i++)
     for (j = char_col-1; j <= char_col+1; j++)
       {
@@ -511,6 +541,7 @@ int td_destroy()
 	      }
 	  }
       }
+#endif
   return(destroy);
 }
 
@@ -525,6 +556,7 @@ int detect_monsters()
 #endif
 
   detect = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -549,6 +581,7 @@ int detect_monsters()
       /* must unlight every monster just lighted */
       creatures(FALSE);
     }
+#endif
   return(detect);
 }
 
@@ -558,6 +591,7 @@ int detect_monsters()
 void light_line(dir, y, x)
 int dir, y, x;
 {
+#ifndef ELKS_WARRIOR
   register int i;
   register cave_type *c_ptr;
   register monster_type *m_ptr;
@@ -621,6 +655,7 @@ int dir, y, x;
       (void) mmove(dir, &y, &x);
     }
   while (!flag);
+#endif
 }
 
 
@@ -628,6 +663,7 @@ int dir, y, x;
 void starlite(y, x)
 register int y, x;
 {
+#ifndef ELKS_WARRIOR
   register int i;
 
   if (py.flags.blind < 1)
@@ -635,6 +671,7 @@ register int y, x;
   for (i = 1; i <= 9; i++)
     if (i != 5)
       light_line(i, y, x);
+#endif
 }
 
 
@@ -647,6 +684,7 @@ int dir, y, x;
   register int disarm, dist;
 
   disarm = FALSE;
+#ifndef ELKS_WARRIOR
   dist = -1;
   do
     {
@@ -683,6 +721,7 @@ int dir, y, x;
       (void) mmove(dir, &y, &x);
     }
   while ((dist <= OBJ_BOLT_RANGE) && c_ptr->fval <= MAX_OPEN_SPACE);
+#endif
   return(disarm);
 }
 
@@ -693,6 +732,7 @@ int typ;
 int32u *weapon_type; int *harm_type;
 int (**destroy)();
 {
+#ifndef ELKS_WARRIOR
   switch(typ)
     {
     case GF_MAGIC_MISSILE:
@@ -733,6 +773,7 @@ int (**destroy)();
     default:
       msg_print("ERROR in get_flags()\n");
     }
+#endif
 }
 
 
@@ -741,6 +782,7 @@ void fire_bolt(typ, dir, y, x, dam, bolt_typ)
 int typ, dir, y, x, dam;
 char *bolt_typ;
 {
+#ifndef ELKS_WARRIOR
   int i, oldy, oldx, dist, flag;
   int32u weapon_type; int harm_type;
   int (*dummy)();
@@ -820,6 +862,7 @@ char *bolt_typ;
       oldx = x;
     }
   while (!flag);
+#endif
 }
 
 
@@ -829,6 +872,7 @@ void fire_ball(typ, dir, y, x, dam_hp, descrip)
 int typ, dir, y, x, dam_hp;
 char *descrip;
 {
+#ifndef ELKS_WARRIOR
   register int i, j;
   int dam, max_dis, thit, tkill, k, tmp;
   int oldy, oldx, dist, flag, harm_type;
@@ -956,6 +1000,7 @@ char *descrip;
 	}
     }
   while (!flag);
+#endif
 }
 
 
@@ -966,6 +1011,7 @@ int typ, y, x, dam_hp;
 char *ddesc;
 int monptr;
 {
+#ifndef ELKS_WARRIOR
   register int i, j;
   int dam, max_dis, harm_type;
   int32u weapon_type;
@@ -1070,6 +1116,7 @@ int monptr;
       if (in_bounds(i, j) && panel_contains(i, j) &&
 	  (distance(y, x, i, j) <= max_dis))
 	lite_spot(i, j);
+#endif
 }
 
 
@@ -1082,6 +1129,7 @@ register int num;
   register inven_type *i_ptr;
 
   res = FALSE;
+#ifndef ELKS_WARRIOR
   if (!find_range(TV_STAFF, TV_WAND, &i, &j))
     msg_print("You have nothing to recharge.");
   else if (get_item(&item_val, "Recharge which item?", i, j, CNIL, CNIL))
@@ -1113,6 +1161,7 @@ register int num;
 	  clear_empty(i_ptr);
 	}
     }
+#endif
   return(res);
 }
 
@@ -1129,6 +1178,7 @@ int dir, y, x, dam;
   vtype out_val, m_name;
 
   monster = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1160,6 +1210,7 @@ int dir, y, x, dam;
 	}
     }
   while (!flag);
+#endif
   return(monster);
 }
 
@@ -1176,6 +1227,7 @@ int dir, y, x;
   vtype out_val, m_name;
 
   drain = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1212,6 +1264,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(drain);
 }
 
@@ -1228,6 +1281,7 @@ int dir, y, x, spd;
   vtype out_val, m_name;
 
   speed = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1268,6 +1322,7 @@ int dir, y, x, spd;
 	}
     }
   while (!flag);
+#endif
   return(speed);
 }
 
@@ -1283,6 +1338,7 @@ int dir, y, x;
   vtype out_val, m_name;
 
   confuse = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1324,6 +1380,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(confuse);
 }
 
@@ -1339,6 +1396,7 @@ int dir, y, x;
   vtype out_val, m_name;
 
   sleep = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1372,6 +1430,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(sleep);
 }
 
@@ -1389,6 +1448,7 @@ int dir, y, x;
   vtype m_name;
 
   wall = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1460,6 +1520,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(wall);
 }
 
@@ -1473,6 +1534,7 @@ int dir, y, x;
   register inven_type *t_ptr;
 
   destroy2 = FALSE;
+#ifndef ELKS_WARRIOR
   dist= 0;
   do
     {
@@ -1504,6 +1566,7 @@ int dir, y, x;
 	}
     }
   while ((dist <= OBJ_BOLT_RANGE) || c_ptr->fval <= MAX_OPEN_SPACE);
+#endif
   return(destroy2);
 }
 
@@ -1520,6 +1583,7 @@ int dir, y, x;
   vtype out_val, m_name;
 
   poly = FALSE;
+#ifndef ELKS_WARRIOR
   flag = FALSE;
   dist = 0;
   do
@@ -1554,6 +1618,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(poly);
 }
 
@@ -1573,6 +1638,7 @@ int dir, y, x;
 #endif
 
   build = FALSE;
+#ifndef ELKS_WARRIOR
   dist = 0;
   flag = FALSE;
   do
@@ -1634,6 +1700,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(build);
 }
 
@@ -1647,6 +1714,7 @@ int dir, y, x;
 
   dist = 0;
   flag = FALSE;
+#ifndef ELKS_WARRIOR
   do
     {
       (void) mmove(dir, &y, &x);
@@ -1662,6 +1730,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(FALSE);
 }
 
@@ -1670,6 +1739,7 @@ int dir, y, x;
 void teleport_away(monptr, dis)
 int monptr, dis;
 {
+#ifndef ELKS_WARRIOR
   register int yn, xn, ctr;
   register monster_type *m_ptr;
 
@@ -1700,6 +1770,7 @@ int monptr, dis;
   m_ptr->ml = FALSE;
   m_ptr->cdis = distance (char_row, char_col, yn, xn);
   update_mon (monptr);
+#endif
 }
 
 
@@ -1707,6 +1778,7 @@ int monptr, dis;
 void teleport_to(ny, nx)
 int ny, nx;
 {
+#ifndef ELKS_WARRIOR
   int dis, ctr, y, x;
   register int i, j;
   register cave_type *c_ptr;
@@ -1740,6 +1812,7 @@ int ny, nx;
   check_view();
   /* light creatures */
   creatures(FALSE);
+#endif
 }
 
 
@@ -1752,6 +1825,7 @@ int dir, y, x;
 
   flag = FALSE;
   result = FALSE;
+#ifndef ELKS_WARRIOR
   dist = 0;
   do
     {
@@ -1768,6 +1842,7 @@ int dir, y, x;
 	}
     }
   while (!flag);
+#endif
   return(result);
 }
 
@@ -1784,6 +1859,7 @@ int mass_genocide()
 #endif
 
   result = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -1799,6 +1875,7 @@ int mass_genocide()
 	  result = TRUE;
 	}
     }
+#endif
   return(result);
 }
 
@@ -1817,6 +1894,7 @@ int genocide()
 #endif
 
   killed = FALSE;
+#ifndef ELKS_WARRIOR
   if (get_com("Which type of creature do you wish exterminated?", &typ))
     for (i = mfptr - 1; i >= MIN_MONIX; i--)
       {
@@ -1841,6 +1919,7 @@ int genocide()
 	      msg_print(out_val);
 	    }
       }
+#endif
   return(killed);
 }
 
@@ -1856,6 +1935,7 @@ int spd;
   vtype out_val, m_name;
 
   speed = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -1895,6 +1975,7 @@ int spd;
 	  msg_print(out_val);
 	}
     }
+#endif
   return(speed);
 }
 
@@ -1908,6 +1989,7 @@ int sleep_monsters2()
   vtype out_val, m_name;
 
   sleep = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -1939,6 +2021,7 @@ int sleep_monsters2()
 	    }
 	}
     }
+#endif
   return(sleep);
 }
 
@@ -1956,6 +2039,7 @@ int mass_poly()
 #endif
 
   mass = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -1978,6 +2062,7 @@ int mass_poly()
 	    }
 	}
     }
+#endif
   return(mass);
 }
 
@@ -1989,6 +2074,7 @@ int detect_evil()
   register monster_type *m_ptr;
 
   flag = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -2009,6 +2095,7 @@ int detect_evil()
       /* must unlight every monster just lighted */
       creatures(FALSE);
     }
+#endif
   return(flag);
 }
 
@@ -2021,6 +2108,7 @@ int num;
   register struct misc *m_ptr;
 
   res = FALSE;
+#ifndef ELKS_WARRIOR
   m_ptr = &py.misc;
   if (m_ptr->chp < m_ptr->mhp)
     {
@@ -2042,6 +2130,7 @@ int num;
       }
       res = TRUE;
     }
+#endif
   return(res);
 }
 
@@ -2053,12 +2142,14 @@ int cure_confusion()
   register struct flags *f_ptr;
 
   cure = FALSE;
+#ifndef ELKS_WARRIOR
   f_ptr = &py.flags;
   if (f_ptr->confused > 1)
     {
       f_ptr->confused = 1;
       cure = TRUE;
     }
+#endif
   return(cure);
 }
 
@@ -2070,12 +2161,14 @@ int cure_blindness()
   register struct flags *f_ptr;
 
   cure = FALSE;
+#ifndef ELKS_WARRIOR
   f_ptr = &py.flags;
   if (f_ptr->blind > 1)
     {
       f_ptr->blind = 1;
       cure = TRUE;
     }
+#endif
   return(cure);
 }
 
@@ -2087,12 +2180,14 @@ int cure_poison()
   register struct flags *f_ptr;
 
   cure = FALSE;
+#ifndef ELKS_WARRIOR
   f_ptr = &py.flags;
   if (f_ptr->poisoned > 1)
     {
       f_ptr->poisoned = 1;
       cure = TRUE;
     }
+#endif
   return(cure);
 }
 
@@ -2104,12 +2199,14 @@ int remove_fear()
   register struct flags *f_ptr;
 
   result = FALSE;
+#ifndef ELKS_WARRIOR
   f_ptr = &py.flags;
   if (f_ptr->afraid > 1)
     {
       f_ptr->afraid = 1;
       result = TRUE;
     }
+#endif
   return(result);
 }
 
@@ -2119,6 +2216,7 @@ int remove_fear()
 /* them into walls.  An "Earthquake" effect.	       -RAK-   */
 void earthquake()
 {
+#ifndef ELKS_WARRIOR
   register int i, j;
   register cave_type *c_ptr;
   register monster_type *m_ptr;
@@ -2193,6 +2291,7 @@ void earthquake()
 	    }
 	  lite_spot(i, j);
 	}
+#endif
 }
 
 
@@ -2202,12 +2301,16 @@ int protect_evil()
   register int res;
   register struct flags *f_ptr;
 
+#ifndef ELKS_WARRIOR
   f_ptr = &py.flags;
   if (f_ptr->protevil == 0)
     res = TRUE;
   else
     res = FALSE;
   f_ptr->protevil += randint(25) + 3*py.misc.lev;
+#else
+    res = FALSE;
+#endif
   return(res);
 }
 
@@ -2215,6 +2318,7 @@ int protect_evil()
 /* Create some high quality mush for the player.	-RAK-	*/
 void create_food()
 {
+#ifndef ELKS_WARRIOR
   register cave_type *c_ptr;
 
   c_ptr = &cave[char_row][char_col];
@@ -2230,6 +2334,7 @@ void create_food()
       place_object(char_row, char_col, FALSE);
       invcopy(&t_list[c_ptr->tptr], OBJ_MUSH);
     }
+#endif
 }
 
 
@@ -2246,6 +2351,7 @@ int damage;
   vtype out_val, m_name;
 
   dispel = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -2269,6 +2375,7 @@ int damage;
 	    prt_experience();
 	}
     }
+#endif
   return(dispel);
 }
 
@@ -2282,6 +2389,7 @@ int turn_undead()
   vtype out_val, m_name;
 
   turn_und = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = mfptr - 1; i >= MIN_MONIX; i--)
     {
       m_ptr = &m_list[i];
@@ -2310,6 +2418,7 @@ int turn_undead()
 	    }
 	}
     }
+#endif
   return(turn_und);
 }
 
@@ -2317,6 +2426,7 @@ int turn_undead()
 /* Leave a glyph of warding. Creatures will not pass over! -RAK-*/
 void warding_glyph()
 {
+#ifndef ELKS_WARRIOR
   register int i;
   register cave_type *c_ptr;
 
@@ -2327,12 +2437,14 @@ void warding_glyph()
       c_ptr->tptr = i;
       invcopy(&t_list[i], OBJ_SCARE_MON);
     }
+#endif
 }
 
 
 /* Lose a strength point.				-RAK-	*/
 void lose_str()
 {
+#ifndef ELKS_WARRIOR
   if (!py.flags.sustain_str)
     {
       (void) dec_stat (A_STR);
@@ -2340,12 +2452,14 @@ void lose_str()
     }
   else
     msg_print("You feel sick for a moment,  it passes.");
+#endif
 }
 
 
 /* Lose an intelligence point.				-RAK-	*/
 void lose_int()
 {
+#ifndef ELKS_WARRIOR
   if (!py.flags.sustain_int)
     {
       (void) dec_stat(A_INT);
@@ -2353,12 +2467,14 @@ void lose_int()
     }
   else
     msg_print("You become dizzy for a moment,  it passes.");
+#endif
 }
 
 
 /* Lose a wisdom point.					-RAK-	*/
 void lose_wis()
 {
+#ifndef ELKS_WARRIOR
   if (!py.flags.sustain_wis)
     {
       (void) dec_stat(A_WIS);
@@ -2366,12 +2482,14 @@ void lose_wis()
     }
   else
     msg_print("You feel naive for a moment,  it passes.");
+#endif
 }
 
 
 /* Lose a dexterity point.				-RAK-	*/
 void lose_dex()
 {
+#ifndef ELKS_WARRIOR
   if (!py.flags.sustain_dex)
     {
       (void) dec_stat(A_DEX);
@@ -2379,12 +2497,14 @@ void lose_dex()
     }
   else
     msg_print("You feel sore for a moment,  it passes.");
+#endif
 }
 
 
 /* Lose a constitution point.				-RAK-	*/
 void lose_con()
 {
+#ifndef ELKS_WARRIOR
   if (!py.flags.sustain_con)
     {
       (void) dec_stat(A_CON);
@@ -2392,12 +2512,14 @@ void lose_con()
     }
   else
     msg_print("You feel sick for a moment,  it passes.");
+#endif
 }
 
 
 /* Lose a charisma point.				-RAK-	*/
 void lose_chr()
 {
+#ifndef ELKS_WARRIOR
   if (!py.flags.sustain_chr)
     {
       (void) dec_stat(A_CHR);
@@ -2405,6 +2527,7 @@ void lose_chr()
     }
   else
     msg_print("Your skin starts to itch, but feels better now.");
+#endif
 }
 
 
@@ -2412,6 +2535,7 @@ void lose_chr()
 void lose_exp(amount)
 int32 amount;
 {
+#ifndef ELKS_WARRIOR
   register int i;
   register struct misc *m_ptr;
   register class_type *c_ptr;
@@ -2448,6 +2572,7 @@ int32 amount;
       prt_level();
       prt_title();
     }
+#endif
 }
 
 
@@ -2458,6 +2583,7 @@ int slow_poison()
   register struct flags *f_ptr;
 
   slow = FALSE;
+#ifndef ELKS_WARRIOR
   f_ptr = &py.flags;
   if (f_ptr->poisoned > 0)
     {
@@ -2466,6 +2592,7 @@ int slow_poison()
       slow = TRUE;
       msg_print("The effect of the poison has been reduced.");
     }
+#endif
   return(slow);
 }
 
@@ -2474,7 +2601,9 @@ int slow_poison()
 void bless(amount)
 int amount;
 {
+#ifndef ELKS_WARRIOR
   py.flags.blessed += amount;
+#endif
 }
 
 
@@ -2482,13 +2611,16 @@ int amount;
 void detect_inv2(amount)
 int amount;
 {
+#ifndef ELKS_WARRIOR
   py.flags.detect_inv += amount;
+#endif
 }
 
 
 static void replace_spot(y, x, typ)
 int y, x, typ;
 {
+#ifndef ELKS_WARRIOR
   register cave_type *c_ptr;
 
   c_ptr = &cave[y][x];
@@ -2514,6 +2646,7 @@ int y, x, typ;
     (void) delete_object(y, x);
   if (c_ptr->cptr > 1)
     delete_monster((int)c_ptr->cptr);
+#endif
 }
 
 
@@ -2524,6 +2657,7 @@ int y, x, typ;
 void destroy_area(y, x)
 register int y, x;
 {
+#ifndef ELKS_WARRIOR
   register int i, j, k;
 
   if (dun_level > 0)
@@ -2543,6 +2677,7 @@ register int y, x;
     }
   msg_print("There is a searing blast of light!");
   py.flags.blind += 10 + randint(10);
+#endif
 }
 
 
@@ -2558,6 +2693,7 @@ int16 limit; /* maximum bonus allowed; usually 10, but weapon's maximum damage
     return(FALSE);
   chance = 0;
   res = FALSE;
+#ifndef ELKS_WARRIOR
   if (*plusses > 0)
     {
       chance = *plusses;
@@ -2569,6 +2705,7 @@ int16 limit; /* maximum bonus allowed; usually 10, but weapon's maximum damage
       *plusses += 1;
       res = TRUE;
     }
+#endif
   return(res);
 }
 
@@ -2583,6 +2720,7 @@ int remove_curse()
 #endif
 
   result = FALSE;
+#ifndef ELKS_WARRIOR
   for (i = INVEN_WIELD; i <= INVEN_OUTER; i++)
     {
       i_ptr = &inventory[i];
@@ -2601,6 +2739,7 @@ int remove_curse()
 	  result = TRUE;
 	}
     }
+#endif
   return(result);
 }
 
@@ -2612,6 +2751,7 @@ int restore_level()
   register struct misc *m_ptr;
 
   restore = FALSE;
+#ifndef ELKS_WARRIOR
   m_ptr = &py.misc;
   if (m_ptr->max_exp > m_ptr->exp)
     {
@@ -2624,5 +2764,6 @@ int restore_level()
 	  prt_experience();
 	}
     }
+#endif
   return(restore);
 }

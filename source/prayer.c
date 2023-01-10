@@ -27,6 +27,7 @@
 /* Pray like HELL.					-RAK-	*/
 void pray()
 {
+#ifndef ELKS_WARRIOR
   int i, j, item_val, dir;
   int choice, chance, result;
   register spell_type *s_ptr;
@@ -224,4 +225,5 @@ void pray()
 	    }
 	}
     }
+#endif
 }
