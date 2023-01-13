@@ -143,6 +143,7 @@ static int roffpline;		/* Place to print line now being loaded. */
 int bool_roff_recall(mon_num)
 int mon_num;
 {
+#ifndef ELKS
   register recall_type *mp;
   register int i;
 
@@ -155,6 +156,7 @@ int mon_num;
   for (i = 0; i < 4; i++)
     if (mp->r_attacks[i])
       return TRUE;
+#endif
   return FALSE;
 }
 
@@ -162,6 +164,7 @@ int mon_num;
 int roff_recall(mon_num)
 int mon_num;
 {
+#ifndef ELKS
   char *p, *q;
   int8u *pu;
   vtype temp;
@@ -759,6 +762,7 @@ int mon_num;
   prt("--pause--", roffpline, 0);
   if (wizard)
     *mp = save_mem;
+#endif
   return inkey();
 }
 
@@ -766,6 +770,7 @@ int mon_num;
 static void roff(p)
 register char *p;
 {
+#ifndef ELKS
   register char *q, *r;
 
   while (*p)
@@ -793,4 +798,5 @@ register char *p;
 	roffp++;
       p++;
     }
+#endif
 }

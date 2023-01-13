@@ -221,6 +221,7 @@ int y, x;
     case 99: /* Scare Mon*/
       break;
 
+#ifndef ELKS
       /* Town level traps are special,	the stores.	*/
     case 101: /* General    */
       enter_store(0);
@@ -240,6 +241,7 @@ int y, x;
     case 106: /* Magic-User */
       enter_store(5);
       break;
+#endif
 
     default:
       msg_print("Unknown trap value.");

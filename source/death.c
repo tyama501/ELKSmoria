@@ -614,8 +614,10 @@ int32 total_points()
 
   total = py.misc.max_exp + (100 * py.misc.max_dlv);
   total += py.misc.au / 100;
+#ifndef ELKS
   for (i = 0; i < INVEN_ARRAY_SIZE; i++)
     total += item_value(&inventory[i]);
+#endif
   total += dun_level*50;
 
   /* Don't ever let the score decrease from one save to the next.  */

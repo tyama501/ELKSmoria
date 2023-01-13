@@ -290,7 +290,9 @@ void print_objects()
 		{
 		  invcopy(&t_list[j], 
 			  sorted_objects[get_obj_num(level,small)]);
+#ifndef ELKS_WARRIOR
 		  magic_treasure(j, level);
+#endif
 		  i_ptr = &t_list[j];
 		  store_bought(i_ptr);
 #ifdef ATARIST_MWC

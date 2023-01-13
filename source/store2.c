@@ -924,6 +924,10 @@ int *cur_top;
       take_one_item(&sell_obj, &s_ptr->store_inven[item_val].sitem);
       if (inven_check_num(&sell_obj))
 	{
+#ifdef ELKS
+	  price = s_ptr->store_inven[item_val].scost;
+	  choice = 0;
+#else
 	  if (s_ptr->store_inven[item_val].scost > 0)
 	    {
 	      price = s_ptr->store_inven[item_val].scost;
@@ -931,6 +935,7 @@ int *cur_top;
 	    }
 	  else
 	    choice = purchase_haggle(store_num, &price, &sell_obj);
+#endif
 	  if (choice == 0)
 	    {
 	      if (py.misc.au >= price)
@@ -1034,7 +1039,11 @@ int store_num, *cur_top;
       msg_print(out_val);
       if (store_check_num(&sold_obj, store_num))
 	{
+#ifdef ELKS
+	  choice = 0;
+#else
 	  choice = sell_haggle(store_num, &price, &sold_obj);
+#endif
 	  if (choice == 0)
 	    {
 	      prt_comment1();

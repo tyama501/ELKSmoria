@@ -161,9 +161,11 @@ void dungeon()
 	  }
 #endif
 
+#ifndef ELKS
       /* turn over the store contents every, say, 1000 turns */
       if ((dun_level != 0) && ((turn % 1000) == 0))
 	store_maint();
+#endif
 
       /* Check for creature generation		*/
       if (randint(MAX_MALLOC_CHANCE) == 1)
@@ -1375,7 +1377,9 @@ char com_val;
       break;
     case '=':		/* (=) set options */
       save_screen();
+#ifndef ELKS
       set_options();
+#endif
       restore_screen();
       free_turn_flag = TRUE;
       break;
@@ -1591,17 +1595,21 @@ char com_val;
     case CTRL('U'):		/* (^U) tunnel up right		(T 9) */
       tunnel(9);
       break;
+#ifndef ELKS_WARRIOR
     case 'z':		/* (z)ap a wand		(a)im a wand */
       aim();
       break;
+#endif
     case 'M':
       screen_map();
       free_turn_flag = TRUE;
       break;
+#ifndef ELKS_WARRIOR
     case 'P':		/* (P)eruse a book	(B)rowse in a book */
       examine_book();
       free_turn_flag = TRUE;
       break;
+#endif
     case 'c':		/* (c)lose an object */
       closeobject();
       break;
@@ -1624,21 +1632,27 @@ char com_val;
       look();
       free_turn_flag = TRUE;
       break;
+#ifndef ELKS_WARRIOR
     case 'm':		/* (m)agic spells */
       cast();
       break;
+#endif
     case 'o':		/* (o)pen something */
       openobject();
       break;
+#ifndef ELKS_WARRIOR
     case 'p':		/* (p)ray */
       pray();
       break;
+#endif
     case 'q':		/* (q)uaff */
       quaff();
       break;
+#ifndef ELKS_WARRIOR
     case 'r':		/* (r)ead */
       read_scroll();
       break;
+#endif
     case 's':		/* (s)earch for a turn */
       search(char_row, char_col, py.misc.srh);
       break;
@@ -1682,10 +1696,12 @@ char com_val;
 	      if (f_ptr->image > 1)
 		f_ptr->image = 1;
 	      break;
+#ifndef ELKS
 	    case CTRL('E'):	/*^E = wizchar */
 	      change_character();
 	      erase_line(MSG_LINE, 0);
 	      break;
+#endif
 	    case CTRL('F'):	/*^F = genocide*/
 	      (void) mass_genocide();
 	      break;
@@ -1729,18 +1745,22 @@ char com_val;
 	    case CTRL('O'):	/*^O = objects */
 	      print_objects();
 	      break;
+#ifndef ELKS
 	    case '\\': /* \ wizard help */
 	      if (rogue_like_commands)
 		helpfile(MORIA_WIZ_HELP);
 	      else
 		helpfile(MORIA_OWIZ_HELP);
 	      break;
+#endif
 	    case CTRL('I'):	/*^I = identify*/
 	      (void) ident_spell();
 	      break;
+#ifndef ELKS
 	    case '*':
 	      wizard_light();
 	      break;
+#endif
 	    case ':':
 	      map_area();
 	      break;
@@ -1765,9 +1785,11 @@ char com_val;
 	      (void) summon_monster(&y, &x, TRUE);
 	      creatures(FALSE);
 	      break;
+#ifndef ELKS
 	    case '@':
 	      wizard_create();
 	      break;
+#endif
 	    default:
 	      if (rogue_like_commands)
 		prt("Type '?' or '\\' for help.", 0, 0);

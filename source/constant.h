@@ -94,6 +94,15 @@ some of the system defines set up there.
 #define DUN_UNUSUAL	 300  /* Level/x chance of unusual room	       */
 
 /* Store constants						*/
+#ifdef ELKS
+#define MAX_OWNERS	 3    /* Number of owners to choose from       */
+#define MAX_STORES	 1    /* Number of different stores	       */
+#define STORE_INVEN_MAX	 5   /* Max number of discrete objs in inven  */
+#define STORE_CHOICES	 26   /* NUMBER of items to choose stock from  */
+#define STORE_MAX_INVEN	 3   /* Max diff objs in stock for auto buy   */
+#define STORE_MIN_INVEN	 2   /* Min diff objs in stock for auto sell  */
+#define STORE_TURN_AROUND 1   /* Amount of buying and selling normally */
+#else
 #define MAX_OWNERS	 18   /* Number of owners to choose from       */
 #define MAX_STORES	 6    /* Number of different stores	       */
 #define STORE_INVEN_MAX	 24   /* Max number of discrete objs in inven  */
@@ -101,6 +110,7 @@ some of the system defines set up there.
 #define STORE_MAX_INVEN	 18   /* Max diff objs in stock for auto buy   */
 #define STORE_MIN_INVEN	 10   /* Min diff objs in stock for auto sell  */
 #define STORE_TURN_AROUND 9   /* Amount of buying and selling normally */
+#endif
 #define COST_ADJ	 100  /* Adjust prices for buying and selling  */
 
 /* Treasure constants						*/

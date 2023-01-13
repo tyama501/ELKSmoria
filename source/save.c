@@ -1274,8 +1274,10 @@ scoreboard; it will not be scored again.");
 
 	      age = (age + 43200L) / 86400L;  /* age in days */
 	      if (age > 10) age = 10; /* in case savefile is very old */
+#ifndef ELKS
 	      for (i = 0; i < age; i++)
 		store_maint();
+#endif
 	    }
 
 	  if (noscore)

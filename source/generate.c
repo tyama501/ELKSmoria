@@ -1285,7 +1285,11 @@ static void cave_gen()
 	  xloc[k] = j * (SCREEN_WIDTH >> 1) + QUART_WIDTH;
 	  if (dun_level > randint(DUN_UNUSUAL))
 	    {
+#ifdef ELKS
+	      tmp = 1;
+#else
 	      tmp = randint(3);
+#endif
 	      if (tmp == 1)	 build_type1(yloc[k], xloc[k]);
 	      else if (tmp == 2) build_type2(yloc[k], xloc[k]);
 	      else		 build_type3(yloc[k], xloc[k]);
@@ -1481,7 +1485,9 @@ static void town_gen()
 	}
       alloc_monster(MIN_MALLOC_TD, 3, TRUE);
     }
+#ifndef ELKS
   store_maint();
+#endif
 }
 
 

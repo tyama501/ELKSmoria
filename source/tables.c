@@ -45,6 +45,16 @@ store_type store[MAX_STORES];
 #ifdef MACGAME
 owner_type *owners;
 #else
+#ifdef ELKS_WARRIOR
+owner_type owners[MAX_OWNERS] = {
+{"Erick the Honest       (Human)      General Store",
+	  250,	175,  108,    4, 0, 12},
+{"Mauglin the Grumpy     (Dwarf)      Armory"	    ,
+	32000,	200,  112,    4, 5,  5},
+{"Arndal Beast-Slayer    (Half-Elf)   Weaponsmith"  ,
+	10000,	185,  110,    5, 1,  8}
+};
+#else
 owner_type owners[MAX_OWNERS] = {
 {"Erick the Honest       (Human)      General Store",
 	  250,	175,  108,    4, 0, 12},
@@ -84,6 +94,7 @@ owner_type owners[MAX_OWNERS] = {
 	32000,	200,  110,    7, 0, 10}
 };
 #endif
+#endif
 
 /* Buying and selling adjustments for character race VS store	*/
 /* owner race							 */
@@ -99,6 +110,19 @@ int8u rgold_adj[MAX_RACES][MAX_RACES] = {
 /*Half-Troll	 */	  {  110,  115,	 115,  110,  110,  130,	 110,  110}
 			};
 /* object_list[] index of objects that may appear in the store */
+#ifdef ELKS_WARRIOR
+int16u store_choice[MAX_STORES][STORE_CHOICES] = {
+	/* General Store */
+{366,365,364,84,84,365,123,366,365,350,349,348,347,346,346,345,345,345,
+	344,344,344,344,344,344,344,344},
+	/* Armory	 */
+{94,95,96,109,103,104,105,106,110,111,112,114,116,124,125,126,127,129,103,
+	104,124,125,91,92,95,96},
+	/* Weaponsmith	 */
+{29,30,34,37,45,49,57,58,59,65,67,68,73,74,75,77,79,80,81,83,29,30,80,83,
+	80,83}
+};
+#else
 int16u store_choice[MAX_STORES][STORE_CHOICES] = {
 	/* General Store */
 {366,365,364,84,84,365,123,366,365,350,349,348,347,346,346,345,345,345,
@@ -119,6 +143,7 @@ int16u store_choice[MAX_STORES][STORE_CHOICES] = {
 {318,141,142,153,164,167,168,140,319,320,320,321,269,270,282,286,287,292,
 	293,294,295,308,269,290,319,282}
 };
+#endif
 
 #ifndef MAC
 /* MPW doesn't seem to handle this very well, so replace store_buy array
@@ -128,8 +153,13 @@ extern int general_store(), armory(), weaponsmith(), temple(),
   alchemist(), magic_shop();
 
 /* Each store will buy only certain items, based on TVAL */
+#ifdef ELKS_WARRIOR
+int (*store_buy[MAX_STORES])() = {
+       general_store, armory, weaponsmith};
+#else
 int (*store_buy[MAX_STORES])() = {
        general_store, armory, weaponsmith, temple, alchemist, magic_shop};
+#endif
 #endif
 
 /* Following are arrays for descriptive pieces			*/

@@ -174,7 +174,9 @@ int y, x, must_be_small;
   /* split this line up to avoid a reported compiler bug */
   tmp = get_obj_num(dun_level, must_be_small);
   invcopy(&t_list[cur_pos], sorted_objects[tmp]);
+#ifndef ELKS_WARRIOR
   magic_treasure(cur_pos, dun_level);
+#endif
   if (cave[y][x].cptr == 1)
     msg_print ("You feel something roll beneath your feet.");	/* -CJS- */
 }

@@ -311,10 +311,12 @@ char *argv[];
 
   /* Init monster and treasure levels for allocate */
   init_m_level();
+#ifndef ELKS
   init_t_level();
 
   /* Init the store inventories			*/
   store_init();
+#endif
 
 #ifndef MAC
   /* On Mac, if -n is passed, no savefile is used */
@@ -382,6 +384,7 @@ char *argv[];
       char_inven_init();
       py.flags.food = 7500;
       py.flags.food_digested = 2;
+#ifndef ELKS_WARRIOR
       if (class[py.misc.pclass].spell == MAGE)
 	{	  /* Magic realm   */
 	  clear_screen(); /* makes spell list easier to read */
@@ -394,6 +397,7 @@ char *argv[];
 	  clear_screen(); /* force out the 'learn prayer' message */
 	  calc_mana(A_WIS);
 	}
+#endif
       /* prevent ^c quit from entering score into scoreboard,
 	 and prevent signal from creating panic save until this point,
 	 all info needed for save file is now valid */
@@ -404,7 +408,9 @@ char *argv[];
   if (force_rogue_like)
     rogue_like_commands = force_keys_to;
 
+#ifndef ELKS_WARRIOR
   magic_init();
+#endif
 
   /* Begin the game				*/
   clear_screen();
