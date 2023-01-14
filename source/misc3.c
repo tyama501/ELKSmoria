@@ -724,6 +724,7 @@ int stat;
     }
   else if (stat == A_DEX)
     calc_bonuses();
+#ifndef ELKS_WARRIOR
   else if (stat == A_INT && class[py.misc.pclass].spell == MAGE)
     {
       calc_spells(A_INT);
@@ -734,6 +735,7 @@ int stat;
       calc_spells(A_WIS);
       calc_mana(A_WIS);
     }
+#endif
   else if (stat == A_CON)
     calc_hitpoints();
 }
@@ -1481,7 +1483,7 @@ register inven_type *i_ptr;
   return locn;
 }
 
-
+#ifndef ELKS_WARRIOR
 /* Returns spell chance of failure for spell		-RAK-	*/
 int spell_chance(spell)
 int spell;
@@ -1505,8 +1507,9 @@ int spell;
     chance = 5;
   return chance;
 }
+#endif
 
-
+#ifndef ELKS_WARRIOR
 /* Print list of spells					-RAK-	*/
 /* if nonconsec is -1: spells numbered consecutively from 'a' to 'a'+num
                   >=0: spells numbered by offset from nonconsec */
@@ -1560,8 +1563,9 @@ int comment, nonconsec;
       prt(out_val, 2+i, col);
     }
 }
+#endif
 
-
+#ifndef ELKS_WARRIOR
 /* Returns spell pointer				-RAK-	*/
 int get_spell(spell, num, sn, sc, prompt, first_spell)
 int *spell;
@@ -1650,8 +1654,9 @@ int first_spell;
 
   return(flag);
 }
+#endif
 
-
+#ifndef ELKS_WARRIOR
 /* calculate number of spells player should have, and learn forget spells
    until that number is met -JEW- */
 void calc_spells(stat)
@@ -1805,8 +1810,9 @@ int stat;
       py.flags.status |= PY_STUDY;
     }
 }
+#endif
 
-
+#ifndef ELKS_WARRIOR
 /* gain spells when player wants to		- jw */
 void gain_spells()
 {
@@ -1958,8 +1964,9 @@ void gain_spells()
 	calc_mana(stat);
     }
 }
+#endif
 
-
+#ifndef ELKS_WARRIOR
 /* Gain some mana if you know at least one spell	-RAK-	*/
 void calc_mana(stat)
 int stat;
@@ -2027,7 +2034,7 @@ int stat;
 #endif
     }
 }
-
+#endif
 
 /* Increases hit points and level			-RAK-	*/
 static void gain_level()
@@ -2053,6 +2060,7 @@ static void gain_level()
   prt_level();
   prt_title();
   c_ptr = &class[p_ptr->pclass];
+#ifndef ELKS_WARRIOR
   if (c_ptr->spell == MAGE)
     {
       calc_spells(A_INT);
@@ -2063,6 +2071,7 @@ static void gain_level()
       calc_spells(A_WIS);
       calc_mana(A_WIS);
     }
+#endif
 }
 
 /* Prints experience					-RAK-	*/

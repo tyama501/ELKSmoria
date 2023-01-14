@@ -35,6 +35,18 @@ int16u player_hp[MAX_PLAYER_LEVEL];
 #ifdef MACGAME
 char *(*player_title)[MAX_PLAYER_LEVEL];
 #else
+#ifdef ELKS_WARRIOR
+char *player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
+	/* Warrior	 */
+{"Rookie","Private","Soldier","Mercenary","Veteran(1st)","Veteran(2nd)",
+"Veteran(3rd)","Warrior(1st)","Warrior(2nd)","Warrior(3rd)","Warrior(4th)",
+"Swordsman-1","Swordsman-2","Swordsman-3","Hero","Swashbuckler","Myrmidon",
+"Champion-1","Champion-2","Champion-3","Superhero","Knight","Superior Knt",
+"Gallant Knt","Knt Errant","Guardian Knt","Baron","Duke","Lord (1st)",
+"Lord (2nd)","Lord (3rd)","Lord (4th)","Lord (5th)","Lord (6th)","Lord (7th)",
+"Lord (8th)","Lord (9th)","Lord Gallant","Lord Keeper","Lord Noble"}
+};
+#else
 char *player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
 	/* Warrior	 */
 {"Rookie","Private","Soldier","Mercenary","Veteran(1st)","Veteran(2nd)",
@@ -91,6 +103,7 @@ char *player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
 "Warder (6th)","Warder (7th)","Warder (8th)","Warder (9th)","Guardian",
 "Chevalier","Justiciar","Paladin","High Lord"}
 };
+#endif
 #endif
 
 /* Base experience levels, may be adjusted up for race and/or class*/
@@ -282,6 +295,12 @@ background_type background[MAX_BACKGROUND] = {
 #endif
 
 /* Classes.							*/
+#ifdef ELKS_WARRIOR
+class_type class[MAX_CLASS] = {
+/*	  HP Dis Src Stl Fos bth btb sve S  I  W  D Co Ch  Spell Exp  spl */
+{"Warrior",9, 25, 14, 1, 38, 70, 55, 18, 5,-2,-2, 2, 2,-1, NONE,    0, 0}
+};
+#else
 class_type class[MAX_CLASS] = {
 /*	  HP Dis Src Stl Fos bth btb sve S  I  W  D Co Ch  Spell Exp  spl */
 {"Warrior",9, 25, 14, 1, 38, 70, 55, 18, 5,-2,-2, 2, 2,-1, NONE,    0, 0},
@@ -291,11 +310,18 @@ class_type class[MAX_CLASS] = {
 {"Ranger", 4, 30, 24, 3, 24, 56, 72, 30, 2, 2, 0, 1, 1, 1, MAGE,   40, 3},
 {"Paladin",6, 20, 12, 1, 38, 68, 40, 24, 3,-3, 1, 0, 2, 2, PRIEST, 35, 1}
 };
+#endif
 
 /* making it 16 bits wastes a little space, but saves much signed/unsigned
    headaches in its use */
 /* CLA_MISC_HIT is identical to CLA_SAVE, which takes advantage of
    the fact that the save values are independent of the class */
+#ifdef ELKS_WARRIOR
+int16 class_level_adj[MAX_CLASS][MAX_LEV_ADJ] = {
+/*	       bth    bthb   device  disarm   save/misc hit  */
+/* Warrior */ {	4,	4,	2,	2,	3 }
+};
+#else
 int16 class_level_adj[MAX_CLASS][MAX_LEV_ADJ] = {
 /*	       bth    bthb   device  disarm   save/misc hit  */
 /* Warrior */ {	4,	4,	2,	2,	3 },
@@ -305,6 +331,7 @@ int16 class_level_adj[MAX_CLASS][MAX_LEV_ADJ] = {
 /* Ranger  */ { 3,	4,	3,	3,	3 },
 /* Paladin */ { 3,	3,	3,	2,	3 }
 };
+#endif
 
 int32u spell_learned = 0;	/* bit mask of spells learned */
 int32u spell_worked = 0;	/* bit mask of spells tried and worked */
@@ -317,6 +344,7 @@ int8u spell_order[32];		/* order spells learned/remembered/forgotten */
 #ifdef MACGAME
 spell_type (*magic_spell)[31];
 #else
+#ifndef ELKS_WARRIOR
 spell_type magic_spell[MAX_CLASS-1][31] = {
   {		  /* Mage	   */
      {	1,  1, 22,   1},
@@ -485,6 +513,7 @@ spell_type magic_spell[MAX_CLASS-1][31] = {
    }
  };
 #endif
+#endif
 
 char *spell_names[62] = {
   /* Mage Spells */
@@ -512,6 +541,11 @@ char *spell_names[62] = {
 /* 344 = Food Ration, 365 = Wooden Torch, 123 = Cloak, 318 = Beginners-Majik,
    103 = Soft Leather Armor, 30 = Stiletto, 322 = Beginners Handbook */
 
+#ifdef ELKS_WARRIOR
+int16u player_init[MAX_CLASS][5] = {
+		{ 344, 365, 123,  30, 103}
+};
+#else
 int16u player_init[MAX_CLASS][5] = {
 		{ 344, 365, 123,  30, 103},	/* Warrior	 */
 		{ 344, 365, 123,  30, 318},	/* Mage		 */
@@ -520,3 +554,4 @@ int16u player_init[MAX_CLASS][5] = {
 		{ 344, 365, 123,  30, 318},	/* Ranger	 */
 		{ 344, 365, 123,  30, 322}	/* Paladin	 */
 };
+#endif

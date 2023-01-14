@@ -205,7 +205,11 @@ some of the system defines set up there.
 #define MAX_PLAYER_LEVEL  40  /* Maximum possible character level      */
 #define MAX_EXP	    9999999L  /* Maximum amount of experience -CJS- */
 #define MAX_RACES	  8   /* Number of defined races	       */
+#ifdef ELKS_WARRIOR
+#define MAX_CLASS	  1   /* Number of defined classes	       */
+#else
 #define MAX_CLASS	  6   /* Number of defined classes	       */
+#endif
 #define USE_DEVICE	  3   /* x> Harder devices x< Easier devices   */
 #define MAX_BACKGROUND	  128 /* Number of types of histories for univ */
 #define PLAYER_FOOD_FULL 10000/* Getting full			       */

@@ -1491,9 +1491,11 @@ char com_val;
     case 'F':		/* (F)ill lamp */
       refill_lamp();
       break;
+#ifndef ELKS_WARRIOR
     case 'G':		/* (G)ain magic spells */
       gain_spells();
       break;
+#endif
     case 'V':		/* (V)iew scores */
       if (last_command != 'V')
 	i = TRUE;

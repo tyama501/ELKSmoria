@@ -249,7 +249,7 @@ int y, x;
     }
 }
 
-
+#ifndef ELKS_WARRIOR
 /* Return spell number and failure chance		-RAK-	*/
 /* returns -1 if no spells in book
    returns 1 if choose a spell in book to cast
@@ -295,7 +295,7 @@ this! Confirm?");
     }
   return(result);
 }
-
+#endif
 
 /* Player is on an object.  Many things can happen based -RAK-	*/
 /* on the TVAL of the object.  Traps are set off, money and most */
