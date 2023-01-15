@@ -162,6 +162,7 @@ race_type race[MAX_RACES] = {
 #ifdef MACGAME
 background_type *background;
 #else
+#ifndef ELKS
 background_type background[MAX_BACKGROUND] = {
 {"You are the illegitimate and unacknowledged child ",		 10, 1, 2, 25},
 {"You are the illegitimate but acknowledged child ",		 20, 1, 2, 35},
@@ -292,6 +293,7 @@ background_type background[MAX_BACKGROUND] = {
 {"scabby skin.",						 66,66, 0, 50},
 {"leprous skin.",						100,66, 0, 50}
 };
+#endif
 #endif
 
 /* Classes.							*/

@@ -95,7 +95,9 @@ int monptr;
 #ifdef ATARIST_MWC
 		  c_recall[m_ptr->mptr].r_cmove |= holder;
 #else
+#ifndef ELKS
 		  c_recall[m_ptr->mptr].r_cmove |= CM_INVISIBLE;
+#endif
 #endif
 		}
 	    }
@@ -105,7 +107,9 @@ int monptr;
 		   (CD_INFRA & r_ptr->cdefense))
 	    {
 	      flag = TRUE;
+#ifndef ELKS
 	      c_recall[m_ptr->mptr].r_cdefense |= CD_INFRA;
+#endif
 	    }
 	}
     }
@@ -395,8 +399,10 @@ int monptr;
       if ((py.flags.protevil > 0) && (r_ptr->cdefense & CD_EVIL) &&
 	  ((py.misc.lev + 1) > r_ptr->level))
 	{
+#ifndef ELKS
 	  if (m_ptr->ml)
 	    c_recall[m_ptr->mptr].r_cdefense |= CD_EVIL;
+#endif
 	  attype = 99;
 	  adesc = 99;
 	}
@@ -902,11 +908,14 @@ int monptr;
 		    m_ptr->confused = 2 + randint(16);
 		}
 	      msg_print(tmp_str);
+#ifndef ELKS
 	      if (visible && !death && randint(4) == 1)
 		c_recall[m_ptr->mptr].r_cdefense |= r_ptr->cdefense &
+#endif
 		  CD_NO_SLEEP;
 	    }
 
+#ifndef ELKS
 	  /* increase number of attacks if notice true, or if visible and had
 	     previously noticed the attack (in which case all this does is
 	     help player learn damage), note that in the second case do
@@ -918,6 +927,7 @@ int monptr;
 	    c_recall[m_ptr->mptr].r_attacks[attackn]++;
 	  if (death && c_recall[m_ptr->mptr].r_deaths < MAX_SHORT)
 	    c_recall[m_ptr->mptr].r_deaths++;
+#endif
 	}
       else
 	{
@@ -1392,6 +1402,7 @@ int *took_turn;
 	  msg_print(cdesc);
 	}
       /* End of spells				       */
+#ifndef ELKS
       if (m_ptr->ml)
 	{
 	  c_recall[m_ptr->mptr].r_spells |= 1L << (thrown_spell-1);
@@ -1400,6 +1411,7 @@ int *took_turn;
 	  if (death && c_recall[m_ptr->mptr].r_deaths < MAX_SHORT)
 	    c_recall[m_ptr->mptr].r_deaths++;
 	}
+#endif
     }
 }
 
@@ -1698,6 +1710,7 @@ int32u *rcmove;
 	       moved, but didn't.  */
 	    *rcmove |= CM_ATTACK_ONLY;
 	}
+#ifndef ELKS
       else if ((r_ptr->cmove & CM_ONLY_MAGIC) && (m_ptr->cdis < 2))
 	{
 	  /* A little hack for Quylthulgs, so that one will eventually notice
@@ -1709,6 +1722,7 @@ int32u *rcmove;
 	  if (c_recall[m_ptr->mptr].r_attacks[0] > 20)
 	    c_recall[m_ptr->mptr].r_cmove |= CM_ONLY_MAGIC;
 	}
+#endif
     }
 }
 
@@ -1719,7 +1733,9 @@ int attack;
 {
   register int i, k;
   register monster_type *m_ptr;
+#ifndef ELKS
   recall_type *r_ptr;
+#endif
   int32u notice, rcmove;
   int wake, ignore;
   vtype cdesc;
@@ -1809,6 +1825,7 @@ int attack;
 		  }
 
 		update_mon(i);
+#ifndef ELKS
 		if (m_ptr->ml)
 		  {
 		    r_ptr = &c_recall[m_ptr->mptr];
@@ -1824,6 +1841,7 @@ int attack;
 		      }
 		    r_ptr->r_cmove |= rcmove;
 		  }
+#endif
 	      }
 	}
       else

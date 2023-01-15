@@ -90,6 +90,7 @@ typedef struct m_attack_type	/* Monster attack and damage types */
     int8u attack_sides;
   } m_attack_type;
 
+#ifndef ELKS
 typedef struct recall_type	/* Monster memories. -CJS- */
   {
     int32u r_cmove;
@@ -99,6 +100,7 @@ typedef struct recall_type	/* Monster memories. -CJS- */
     int8u r_wake, r_ignore;
     int8u r_attacks[MAX_MON_NATTACK];
   } recall_type;
+#endif
 
 typedef struct monster_type
 {
@@ -206,7 +208,9 @@ typedef struct player_type
       int16u cmana_frac; /* Cur mana fraction * 2^16 */
       int16 chp;	/* Cur hit pts		*/
       int16u chp_frac;	/* Cur hit fraction * 2^16 */
+#ifndef ELKS
       char history[4][60]; /* History record	*/
+#endif
     } misc;
   /* Stats now kept in arrays, for more efficient access. -CJS- */
   struct stats
@@ -327,6 +331,7 @@ typedef struct class_type
   int8u first_spell_lev;/* First level where class can use spells. */
 } class_type;
 
+#ifndef ELKS
 typedef struct background_type
 {
   char *info;		/* History information		*/
@@ -335,6 +340,7 @@ typedef struct background_type
   int8u next;		/* Pointer to next table	*/
   int8u bonus;		/* Bonus to the Social Class+50	*/
 } background_type;
+#endif
 
 typedef struct cave_type
 {

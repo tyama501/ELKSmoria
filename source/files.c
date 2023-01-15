@@ -484,10 +484,12 @@ char *filename1;
       (void) fprintf(file1, " Saving Throw: %-10s", likert(xsave, 6));
       (void) fprintf(file1, "   Magic Device: %-10s", likert(xdev, 6));
       (void) fprintf(file1, "   Infra-Vision: %s\n\n", xinfra);
+#ifndef ELKS
       /* Write out the character's history     */
       (void) fprintf(file1, "Character Background\n");
       for (i = 0; i < 4; i++)
 	(void) fprintf(file1, " %s\n", py.misc.history[i]);
+#endif
       /* Write out the equipment list.	     */
       j = 0;
       (void) fprintf(file1, "\n  [Character's Equipment List]\n\n");

@@ -681,14 +681,18 @@ int monptr, dam;
 	  c_recall[m_ptr->mptr].r_cmove =
 	    (c_recall[m_ptr->mptr].r_cmove & ~holder) | i;
 #else
+#ifndef ELKS
 	  tmp = (c_recall[m_ptr->mptr].r_cmove & CM_TREASURE) >> CM_TR_SHIFT;
 	  if (tmp > ((i & CM_TREASURE) >> CM_TR_SHIFT))
 	    i = (i & ~CM_TREASURE) | (tmp << CM_TR_SHIFT);
 	  c_recall[m_ptr->mptr].r_cmove =
 	    (c_recall[m_ptr->mptr].r_cmove & ~CM_TREASURE) | i;
 #endif
+#endif
+#ifndef ELKS
 	  if (c_recall[m_ptr->mptr].r_kills < MAX_SHORT)
 	    c_recall[m_ptr->mptr].r_kills++;
+#endif
 	}
       c_ptr = &c_list[m_ptr->mptr];
       p_ptr = &py.misc;
@@ -801,9 +805,11 @@ int y, x;
 		    m_list[crptr].confused = 2 + randint(16);
 		}
 	      msg_print(out_val);
+#ifndef ELKS
 	      if (m_list[crptr].ml && randint(4) == 1)
 		c_recall[monptr].r_cdefense |=
 		  c_list[monptr].cdefense & CD_NO_SLEEP;
+#endif
 	    }
 
 	  /* See if we done it in.				 */

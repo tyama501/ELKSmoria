@@ -108,7 +108,9 @@ cave_type cave[MAX_HEIGHT][MAX_WIDTH];
 #ifdef MAC
 recall_type *c_recall;
 #else
+#ifndef ELKS
 recall_type c_recall[MAX_CREATURES];	/* Monster memories */
+#endif
 #endif
 
 /* See atarist/st-stuff.c */

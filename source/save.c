@@ -139,7 +139,9 @@ static int sv_write()
   int count;
   int8u char_tmp, prev_char;
   register cave_type *c_ptr;
+#ifndef ELKS
   register recall_type *r_ptr;
+#endif
   struct stats *s_ptr;
   register struct flags *f_ptr;
   store_type *st_ptr;
@@ -181,6 +183,7 @@ static int sv_write()
   if (total_winner)
     l |= 0x40000000L;
 
+#ifndef ELKS
   for (i = 0; i < MAX_CREATURES; i++)
     {
       r_ptr = &c_recall[i];
@@ -199,6 +202,7 @@ static int sv_write()
 	  wr_bytes(r_ptr->r_attacks, MAX_MON_NATTACK);
 	}
     }
+#endif
   wr_short((int16u)0xFFFF); /* sentinel to indicate no more monster info */
 
   wr_long(l);
@@ -241,8 +245,10 @@ static int sv_write()
   wr_short(m_ptr->cmana_frac);
   wr_short((int16u)m_ptr->chp);
   wr_short(m_ptr->chp_frac);
+#ifndef ELKS
   for (i = 0; i < 4; i++)
     wr_string (m_ptr->history[i]);
+#endif
 
   s_ptr = &py.stats;
   wr_bytes(s_ptr->max_stat, 6);
@@ -688,7 +694,9 @@ int *generate;
   vtype temp;
   int16u int16u_tmp;
   register cave_type *c_ptr;
+#ifndef ELKS
   register recall_type *r_ptr;
+#endif
   struct misc *m_ptr;
   struct stats *s_ptr;
   register struct flags *f_ptr;
@@ -793,6 +801,7 @@ int *generate;
 	  goto error;
 	}
 
+#ifndef ELKS
       rd_short(&int16u_tmp);
       while (int16u_tmp != 0xFFFF)
 	{
@@ -809,6 +818,7 @@ int *generate;
 	  rd_bytes(r_ptr->r_attacks, MAX_MON_NATTACK);
 	  rd_short(&int16u_tmp);
 	}
+#endif
 
       /* for save files before 5.2.2, read and ignore log_index (sic) */
       if ((version_min < 2) || (version_min == 2 && patch_level < 2))
@@ -918,8 +928,10 @@ int *generate;
 	  rd_short(&m_ptr->cmana_frac);
 	  rd_short((int16u *)&m_ptr->chp);
 	  rd_short(&m_ptr->chp_frac);
+#ifndef ELKS
 	  for (i = 0; i < 4; i++)
 	    rd_string (m_ptr->history[i]);
+#endif
 
 	  s_ptr = &py.stats;
 	  rd_bytes(s_ptr->max_stat, 6);

@@ -137,7 +137,9 @@ extern background_type *background;
 #else
 extern char *player_title[MAX_CLASS][MAX_PLAYER_LEVEL];
 extern race_type race[MAX_RACES];
+#ifndef ELKS
 extern background_type background[MAX_BACKGROUND];
+#endif
 #endif
 extern int32u player_exp[MAX_PLAYER_LEVEL];
 extern int16u player_hp[MAX_PLAYER_LEVEL];
@@ -209,7 +211,9 @@ extern m_attack_type monster_attacks[N_MONS_ATTS];
 #ifdef MAC
 extern recall_type *c_recall;
 #else
+#ifndef ELKS
 extern recall_type c_recall[MAX_CREATURES];	/* Monster memories. -CJS- */
+#endif
 #endif
 extern monster_type blank_monster;	/* Blank monster values	*/
 extern int16 mfptr;	/* Cur free monster ptr	*/

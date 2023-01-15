@@ -2332,7 +2332,9 @@ register int tdam;
 int monster;
 {
   register creature_type *m_ptr;
+#ifndef ELKS
   register recall_type *r_ptr;
+#endif
 #ifdef ATARIST_MWC
   int32u holder;
 #endif
@@ -2347,12 +2349,16 @@ int monster;
        (i_ptr->tval == TV_FLASK)))
     {
       m_ptr = &c_list[monster];
+#ifndef ELKS
       r_ptr = &c_recall[monster];
+#endif
       /* Slay Dragon  */
       if ((m_ptr->cdefense & CD_DRAGON) && (i_ptr->flags & TR_SLAY_DRAGON))
 	{
 	  tdam = tdam * 4;
+#ifndef ELKS
 	  r_ptr->r_cdefense |= CD_DRAGON;
+#endif
 	}
       /* Slay Undead  */
 #ifdef ATARIST_MWC
@@ -2364,20 +2370,26 @@ int monster;
 #endif
 	{
 	  tdam = tdam * 3;
+#ifndef ELKS
 	  r_ptr->r_cdefense |= CD_UNDEAD;
+#endif
 	}
       /* Slay Animal  */
       else if ((m_ptr->cdefense & CD_ANIMAL)
 	       && (i_ptr->flags & TR_SLAY_ANIMAL))
 	{
 	  tdam = tdam * 2;
+#ifndef ELKS
 	  r_ptr->r_cdefense |= CD_ANIMAL;
+#endif
 	}
       /* Slay Evil     */
       else if ((m_ptr->cdefense & CD_EVIL) && (i_ptr->flags & TR_SLAY_EVIL))
 	{
 	  tdam = tdam * 2;
+#ifndef ELKS
 	  r_ptr->r_cdefense |= CD_EVIL;
+#endif
 	}
       /* Frost	       */
 #ifdef ATARIST_MWC
@@ -2389,7 +2401,9 @@ int monster;
 #endif
 	{
 	  tdam = tdam * 3 / 2;
+#ifndef ELKS
 	  r_ptr->r_cdefense |= CD_FROST;
+#endif
 	}
       /* Fire	      */
 #ifdef ATARIST_MWC
@@ -2401,7 +2415,9 @@ int monster;
 #endif
 	{
 	  tdam = tdam * 3 / 2;
+#ifndef ELKS
 	  r_ptr->r_cdefense |= CD_FIRE;
+#endif
 	}
     }
   return(tdam);

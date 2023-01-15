@@ -201,7 +201,7 @@ static void choose_race()
   put_buffer(r_ptr->trace, 3, 15);
 }
 
-
+#ifndef ELKS
 /* Will print the history of a character			-JWT-	*/
 static void print_history()
 {
@@ -211,8 +211,9 @@ static void print_history()
   for (i = 0; i < 4; i++)
     prt(py.misc.history[i], i+15, 10);
 }
+#endif
 
-
+#ifndef ELKS
 /* Get the racial history, determines social class	-RAK-	*/
 /* Assumptions:	Each race has init history beginning at		*/
 /*		(race-1)*3+1					*/
@@ -297,7 +298,7 @@ static void get_history()
     social_class = 1;
   py.misc.sc = social_class;
 }
-
+#endif
 
 /* Gets the character's sex				-JWT-	*/
 static void get_sex()
@@ -527,9 +528,13 @@ void create_character()
 
   /* here we start a loop giving a player a choice of characters -RGM- */
   get_all_stats ();
+#ifndef ELKS
   get_history();
+#endif
   get_ahw();
+#ifndef ELKS
   print_history();
+#endif
   put_misc1();
   put_stats();
 
@@ -544,9 +549,13 @@ void create_character()
       else if (c == ' ')
 	{
 	  get_all_stats ();
+#ifndef ELKS
 	  get_history();
+#endif
 	  get_ahw();
+#ifndef ELKS
 	  print_history();
+#endif
 	  put_misc1();
 	  put_stats();
 	}
