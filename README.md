@@ -1,10 +1,12 @@
 # ELKS Moria
-This fork repository is to port UMoria 5.6 to ELKS and just started.
+This fork repository is to make a roguelike game for ELKS based on UMoria 5.6 and it is just started.
 ELKS is the Embeddable Linux Kernel Subset in the following repository.
 https://github.com/jbruchon/elks
 
 The code size is limitted to 128KB, and the data segment size is limitted to 64KB,
-so some shrink is needed.
+so great amount of shrink is needed.
+
+Now I am triying to create a Warrior only game with a few treasures on the field without shops.
 
 The following text is the README of the original repository.
 
