@@ -225,7 +225,9 @@ char *argv[];
 
   /* call this routine to grab a file pointer to the highscore file */
   /* and prepare things to relinquish setuid privileges */
+#ifndef ELKS
   init_scorefile();
+#endif
 
 #ifndef SECURE
 #if !defined(MSDOS) && !defined(ATARIST_MWC) && !defined(MAC)
@@ -244,6 +246,10 @@ char *argv[];
 #endif
 #endif
 #endif
+#endif
+
+#ifdef ELKS
+  printf("Welcome to ELKSmoria!\n");
 #endif
 
   /* use curses */

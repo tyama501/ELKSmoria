@@ -57,6 +57,7 @@ static char *stat_names[] = { "STR : ", "INT : ", "WIS : ",
 static char blank_string[] = "                        ";
 
 
+#ifndef ELKS
 /* Places a particular trap at location y, x		-RAK-	*/
 void place_trap(y, x, subval)
 int y, x, subval;
@@ -67,8 +68,9 @@ int y, x, subval;
   cave[y][x].tptr  = cur_pos;
   invcopy(&t_list[cur_pos], OBJ_TRAP_LIST + subval);
 }
+#endif
 
-
+#ifndef ELKS
 /* Places rubble at location y, x			-RAK-	*/
 void place_rubble(y, x)
 int y, x;
@@ -82,7 +84,7 @@ int y, x;
   cave_ptr->fval = BLOCKED_FLOOR;
   invcopy(&t_list[cur_pos], OBJ_RUBBLE);
 }
-
+#endif
 
 /* Places a treasure (Gold or Gems) at given row, column -RAK-	*/
 void place_gold(y, x)
@@ -201,8 +203,10 @@ int typ, num;
       while ((!(*alloc_set)(cave[i][j].fval)) ||
 	     (cave[i][j].tptr != 0) || (i == char_row && j == char_col));
       if (typ < 4) {	/* typ == 2 not used, used to be visible traps */
+#ifndef ELKS
 	if (typ == 1) place_trap(i, j, randint(MAX_TRAP)-1); /* typ == 1 */
 	else	      place_rubble(i, j); /* typ == 3 */
+#endif
       } else {
 	if (typ == 4) place_gold(i, j); /* typ == 4 */
 	else	      place_object(i, j, FALSE); /* typ == 5 */

@@ -37,7 +37,9 @@ char  days[7][29] = { "SUN:XXXXXXXXXXXXXXXXXXXXXXXX",
 #ifdef MAC
 store_type *store;
 #else
+#ifndef ELKS
 store_type store[MAX_STORES];
+#endif
 #endif
 
 /* Store owners have different characteristics for pricing and haggling*/
@@ -45,16 +47,7 @@ store_type store[MAX_STORES];
 #ifdef MACGAME
 owner_type *owners;
 #else
-#ifdef ELKS_WARRIOR
-owner_type owners[MAX_OWNERS] = {
-{"Erick the Honest       (Human)      General Store",
-	  250,	175,  108,    4, 0, 12},
-{"Mauglin the Grumpy     (Dwarf)      Armory"	    ,
-	32000,	200,  112,    4, 5,  5},
-{"Arndal Beast-Slayer    (Half-Elf)   Weaponsmith"  ,
-	10000,	185,  110,    5, 1,  8}
-};
-#else
+#ifndef ELKS
 owner_type owners[MAX_OWNERS] = {
 {"Erick the Honest       (Human)      General Store",
 	  250,	175,  108,    4, 0, 12},
@@ -110,19 +103,7 @@ int8u rgold_adj[MAX_RACES][MAX_RACES] = {
 /*Half-Troll	 */	  {  110,  115,	 115,  110,  110,  130,	 110,  110}
 			};
 /* object_list[] index of objects that may appear in the store */
-#ifdef ELKS_WARRIOR
-int16u store_choice[MAX_STORES][STORE_CHOICES] = {
-	/* General Store */
-{366,365,364,84,84,365,123,366,365,350,349,348,347,346,346,345,345,345,
-	344,344,344,344,344,344,344,344},
-	/* Armory	 */
-{94,95,96,109,103,104,105,106,110,111,112,114,116,124,125,126,127,129,103,
-	104,124,125,91,92,95,96},
-	/* Weaponsmith	 */
-{29,30,34,37,45,49,57,58,59,65,67,68,73,74,75,77,79,80,81,83,29,30,80,83,
-	80,83}
-};
-#else
+#ifndef ELKS
 int16u store_choice[MAX_STORES][STORE_CHOICES] = {
 	/* General Store */
 {366,365,364,84,84,365,123,366,365,350,349,348,347,346,346,345,345,345,
@@ -145,6 +126,7 @@ int16u store_choice[MAX_STORES][STORE_CHOICES] = {
 };
 #endif
 
+#ifndef ELKS
 #ifndef MAC
 /* MPW doesn't seem to handle this very well, so replace store_buy array
    with a function call on mac */
@@ -153,10 +135,6 @@ extern int general_store(), armory(), weaponsmith(), temple(),
   alchemist(), magic_shop();
 
 /* Each store will buy only certain items, based on TVAL */
-#ifdef ELKS_WARRIOR
-int (*store_buy[MAX_STORES])() = {
-       general_store, armory, weaponsmith};
-#else
 int (*store_buy[MAX_STORES])() = {
        general_store, armory, weaponsmith, temple, alchemist, magic_shop};
 #endif

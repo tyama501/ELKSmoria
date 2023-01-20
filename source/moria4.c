@@ -1150,6 +1150,7 @@ void bash()
 	      else if (command_count == 0)
 		msg_print("The door holds firm.");
 	    }
+#ifndef ELKS
 	  else if (t_ptr->tval == TV_CHEST)
 	    {
 	      if (randint(10) == 1)
@@ -1167,6 +1168,7 @@ void bash()
 	      else
 		count_msg_print("The chest holds firm.");
 	    }
+#endif
 	  else 
 	    /* Can't give free turn, or else player could try directions
 	       until he found invisible creature */

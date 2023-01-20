@@ -540,14 +540,17 @@ char *spell_names[62] = {
 
 /* Each type of character starts out with a few provisions.	*/
 /* Note that the entries refer to elements of the object_list[] array*/
+#ifdef ELKS_WARRIOR
+/* 6 = Food Ration, 7 = Wooden Torch, 5 = Cloak,
+   4 = Soft Leather Armor, 3 = Stiletto */
+
+int16u player_init[MAX_CLASS][5] = {
+		{   6,   7,   5,   3,   4}
+};
+#else
 /* 344 = Food Ration, 365 = Wooden Torch, 123 = Cloak, 318 = Beginners-Majik,
    103 = Soft Leather Armor, 30 = Stiletto, 322 = Beginners Handbook */
 
-#ifdef ELKS_WARRIOR
-int16u player_init[MAX_CLASS][5] = {
-		{ 344, 365, 123,  30, 103}
-};
-#else
 int16u player_init[MAX_CLASS][5] = {
 		{ 344, 365, 123,  30, 103},	/* Warrior	 */
 		{ 344, 365, 123,  30, 318},	/* Mage		 */

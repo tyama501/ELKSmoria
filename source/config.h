@@ -242,7 +242,20 @@ some of the system defines set up here.
 #define MORIA_VER	"/usr/lib/games/moria/version.hlp"
 
 #else
+#ifdef ELKS
+#define MORIA_SAV	"morisave"
+#define MORIA_HOU	"./files/hours"
+#define MORIA_MOR	"./files/news"
+#define MORIA_GPL	"./files/COPYING"
+#define MORIA_TOP	"./files/scores"
+#define MORIA_HELP	"./files/roglcmds.hlp"
+#define MORIA_ORIG_HELP	"./files/origcmds.hlp"
+#define MORIA_WIZ_HELP	"./files/rwizcmds.hlp"
+#define MORIA_OWIZ_HELP	"./files/owizcmds.hlp"
+#define MORIA_WELCOME	"./files/welcome.hlp"
+#define MORIA_VER	"./files/version.hlp"
 
+#else
 /* Generic UNIX */
 /* This must be unix; change file names as appropriate.  */
 #define MORIA_SAV	"moria-save"
@@ -257,6 +270,7 @@ some of the system defines set up here.
 #define MORIA_WELCOME	"/home/dgrabiner/moria-5.6/files/welcome.hlp"
 #define MORIA_VER	"/home/dgrabiner/moria-5.6/files/version.hlp"
 
+#endif
 #endif
 #endif
 #endif

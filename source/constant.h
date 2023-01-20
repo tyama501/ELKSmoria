@@ -120,6 +120,20 @@ some of the system defines set up there.
 /* Note that the following constants are all related, if you change one,
    you must also change all succeeding ones.  Also, player_init[] and
    store_choice[] may also have to be changed. */
+#ifdef ELKS
+#define MAX_OBJECTS    16    /* Number of objects for universe	       */
+#define MAX_DUNGEON_OBJ 16   /* Number of dungeon objects */
+#define OBJ_OPEN_DOOR	8
+#define OBJ_CLOSED_DOOR 9
+#define OBJ_UP_STAIR	10
+#define OBJ_DOWN_STAIR	11
+#define OBJ_GOLD_LIST	12
+#define OBJ_NOTHING	15
+#define OBJECT_IDENT_SIZE 448 /* 7*64, see object_offset() in desc.c,
+				 could be MAX_OBJECTS o_o() rewritten  */
+#define MAX_GOLD       3      /* Number of different types of gold     */
+#define MAX_TALLOC     20     /* Max objects per level		       */
+#else
 #define MAX_OBJECTS    420    /* Number of objects for universe	       */
 #define MAX_DUNGEON_OBJ 344   /* Number of dungeon objects */
 #define OBJ_OPEN_DOOR	367
@@ -142,6 +156,7 @@ some of the system defines set up there.
 /* with MAX_TALLOC 150, it is possible to get compacting objects during
    level generation, although it is extremely rare */
 #define MAX_TALLOC     175    /* Max objects per level		       */
+#endif
 #define MIN_TRIX	1     /* Minimum t_list index used		*/
 #define TREAS_ROOM_ALLOC  7   /* Amount of objects for rooms	       */
 #define TREAS_ANY_ALLOC	  2   /* Amount of objects for corridors       */

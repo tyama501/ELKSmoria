@@ -87,7 +87,9 @@ int y, x;
 	objdes(tmp, t_ptr, TRUE);
 	take_hit(dam, tmp);
       }
+#ifndef ELKS
       place_trap(y, x, 0);
+#endif
       break;
     case 4: /* Trap door*/
       msg_print("You fell through a trap door!");
@@ -147,7 +149,9 @@ int y, x;
     case 9: /* Rockfall*/
       take_hit(dam, "a falling rock");
       (void) delete_object(y, x);
+#ifndef ELKS
       place_rubble(y, x);
+#endif
       msg_print("You are hit by falling rock.");
       break;
     case 10: /* Corrode gas*/

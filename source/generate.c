@@ -334,7 +334,7 @@ int y, x;
   t_list[cur_pos].p1 = -randint(10) - 10;
 }
 
-
+#ifndef ELKS
 static void place_secret_door(y, x)
 int y, x;
 {
@@ -347,7 +347,7 @@ int y, x;
   invcopy(&t_list[cur_pos], OBJ_SECRET_DOOR);
   cave_ptr->fval  = BLOCKED_FLOOR;
 }
-
+#endif
 
 static void place_door(y, x)
 int y, x;
@@ -372,8 +372,10 @@ int y, x;
       else
 	place_locked_door(y, x);
     }
+#ifndef ELKS
   else
     place_secret_door(y, x);
+#endif
 }
 
 
@@ -1362,7 +1364,7 @@ static void cave_gen()
   if (dun_level >= WIN_MON_APPEAR)  place_win_monster();
 }
 
-
+#ifndef ELKS
 /* Builds a store at a row, column coordinate			*/
 static void build_store(store_num, y, x)
 int store_num, y, x;
@@ -1401,7 +1403,7 @@ int store_num, y, x;
   c_ptr->tptr = cur_pos;
   invcopy(&t_list[cur_pos], OBJ_STORE_DOOR + store_num);
 }
-
+#endif
 
 /* Link all free space in treasure list together		*/
 static void tlink()
@@ -1440,7 +1442,9 @@ static void town_gen()
     for (j = 0; j < 3; j++)
       {
 	k = randint(l) - 1;
+#ifndef ELKS
 	build_store(rooms[k], i, j);
+#endif
 	for (m = k; m < l-1; m++)
 	  rooms[m] = rooms[m+1];
 	l--;

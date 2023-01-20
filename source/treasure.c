@@ -78,6 +78,48 @@
 #if defined(MACGAME) || defined(RSRC_PART2)
 treasure_type *object_list;
 #else
+#ifdef ELKS
+treasure_type object_list[MAX_OBJECTS] = {
+{"Cure Poison"			,0x00000020L,	TV_FOOD, ',',	/*  0*/
+  500,	  60,	69,   1,   1,	0,   0,	 0,   0, {0,0}	,  8},
+{"First-Aid"			,0x00200000L,	TV_FOOD, ',',	/*  1*/
+  500,	   5,	76,   1,   1,	0,   0,	 0,   0, {0,0}	,  6},
+{"Restoration"			,0x001F8000L,	TV_FOOD, ',',	/*  2*/
+  500,	1000,	79,   1,   1,	0,   0,	 0,   0, {0,0}	, 30},
+{"& Dagger (Stiletto)"		,0x00000000L,	TV_SWORD, '|',	/*  3*/
+    0,	  10,	3,   1,  12,	0,   0,	 0,   0, {1,4}	,  0},
+{"Soft Leather Armor"		,0x00000000L,	TV_SOFT_ARMOR, '(',/*  4*/
+    0,	  18,	2,   1,  80,	0,   0,	 4,   0, {0,0}	,  2},
+{"& Cloak"			,0x00000000L,	TV_CLOAK, '(',	/*  5*/
+    0,	   3,	1,   1,  10,	0,   0,	 1,   0, {0,0}	,  1},
+{"& Ration~ of Food"		,0x00000000L,	TV_FOOD, ',',	/*  6*/
+ 5000,	   3,	90,   5,  10,	0,   0,	 0,   0, {0,0}	,  0},
+{"& Wooden Torch~"		,0x00000000L,	TV_LIGHT, '~',	/*  7*/
+ 4000,	   2, 192,   5,  30,	0,   0,	 0,   0, {1,1}	,  1},
+/* start doors */
+{"& open door"			,0x00000000L, TV_OPEN_DOOR, '\'',	/*  8*/
+    0,	   0,	1,   1,   0,	0,   0,	 0,   0, {1,1}	,  0},
+{"& closed door"		,0x00000000L, TV_CLOSED_DOOR, '+',	/*  9*/
+    0,	   0,	19,   1,   0,	0,   0,	 0,   0, {1,1}	,  0},
+/* end doors */
+/* stairs */
+{"an up staircase"		,0x00000000L, TV_UP_STAIR, '<',	/* 10*/
+    0,	   0,	1,   1,   0,	0,   0,	 0,   0, {1,1}	,  0},
+{"a down staircase"		,0x00000000L, TV_DOWN_STAIR, '>',/* 11*/
+    0,	   0,	1,   1,   0,	0,   0,	 0,   0, {1,1}	,  0},
+/* Gold list (All types of gold and gems are defined here)	*/
+{"copper"			,0x00000000L, TV_GOLD, '$',	/* 12*/
+    0,	   3,	1,   1,   0,	0,   0,	 0,   0, {0,0}	  ,  1},
+{"silver"			,0x00000000L, TV_GOLD, '$',	/* 13*/
+    0,	   6,	4,   1,   0,	0,   0,	 0,   0, {0,0}	  ,  1},
+{"gold"				,0x00000000L, TV_GOLD, '$',	/* 14*/
+    0,	  12,	9,   1,   0,	0,   0,	 0,   0, {0,0}	  ,  1},
+/* nothing, used as inventory place holder */
+/* must be stackable, so that can be picked up by inven_carry */
+{"nothing"			,0x00000000L,  TV_NOTHING, ' ',	/* 15*/
+   0,       0,  64,   0,   0,   0,   0,   0,   0, {0,0}    ,  0}
+};
+#else
 treasure_type object_list[MAX_OBJECTS] = {
 /* Dungeon items from 0 to MAX_DUNGEON_OBJ */
 {"Poison"			,0x00000001L,	TV_FOOD, ',',	/*  0*/
@@ -951,6 +993,7 @@ treasure_type object_list[MAX_OBJECTS] = {
 {""				,0x00000000L,  TV_NOTHING, ' ',	/* 419 */
    0,       0,   0,   0,   0,   0,   0,   0,   0, {0,0}  ,  0}
 };
+#endif
 #endif
 
 char *special_names[SN_ARRAY_SIZE] = {

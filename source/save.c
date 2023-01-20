@@ -328,6 +328,7 @@ static int sv_write()
   wr_short((int16u)noscore);
   wr_shorts(player_hp, MAX_PLAYER_LEVEL);
 
+#ifndef ELKS
   for (i = 0; i < MAX_STORES; i++)
     {
       st_ptr = &store[i];
@@ -343,6 +344,7 @@ static int sv_write()
 	  wr_item(&st_ptr->store_inven[j].sitem);
 	}
     }
+#endif
 
   /* save the current time in the savefile */
 #ifdef MAC
@@ -1014,6 +1016,7 @@ int *generate;
 
 	  if ((version_min >= 2)
 	      || (version_min == 1 && patch_level >= 3))
+#ifndef ELKS
 	    for (i = 0; i < MAX_STORES; i++)
 	      {
 		st_ptr = &store[i];
@@ -1031,6 +1034,7 @@ int *generate;
 		    rd_item(&st_ptr->store_inven[j].sitem);
 		  }
 	      }
+#endif
 
 	  if ((version_min >= 2)
 	      || (version_min == 1 && patch_level >= 3))
@@ -1187,6 +1191,7 @@ int *generate;
 
       if ((version_min == 1 && patch_level < 3)
 	  || (version_min == 0))
+#ifndef ELKS
 	for (i = 0; i < MAX_STORES; i++)
 	  {
 	    st_ptr = &store[i];
@@ -1204,6 +1209,7 @@ int *generate;
 		rd_item(&st_ptr->store_inven[j].sitem);
 	      }
 	  }
+#endif
 
       /* read the time that the file was saved */
       if (version_min == 0 && patch_level < 16)
