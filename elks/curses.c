@@ -170,6 +170,13 @@ int addch(int ch)
 
 int mvaddstr(int y ,int x, char * str)
 {
+    int i = 0;
+
+    while (str[i]!="\0" && i < 80) {
+       mvaddch(y,x+i,str[i]);
+       i++;
+    }
+
     return OK;
 }
 
@@ -180,6 +187,9 @@ int addstr(char * str)
 
 int clear(void)
 {
+    erase();
+    refresh();
+
     return OK;
 }
 
