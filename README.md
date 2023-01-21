@@ -1,4 +1,4 @@
-# ELKS Moria
+# ELKSmoria
 This fork repository is to make a roguelike game for ELKS based on UMoria 5.6 and it is just started.  
 ELKS is the Embeddable Linux Kernel Subset in the following repository.  
 https://github.com/jbruchon/elks
