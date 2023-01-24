@@ -369,6 +369,7 @@ void init_curses()
 #endif
 #endif
 #endif
+#ifndef ELKS
   if (((savescr = newwin (0, 0, 0, 0)) == NULL)
 #ifdef VMS
       || ((tempscr = newwin (0, 0, 0, 0)) == NULL))
@@ -379,6 +380,7 @@ void init_curses()
       (void) printf ("Out of memory in starting up curses.\n");
       exit_game();
     }
+#endif
   (void) clear();
   (void) refresh();
   moriaterm ();
@@ -1122,8 +1124,18 @@ int row;
 }
 #else
 {
+#ifdef ELKS
+  int i;
+#endif
+
   (void) move(row, 0);
+
+#ifdef ELKS
+  for (i = 0; i < (LINES - row); i++)
+    clrnl();
+#else
   clrtobot();
+#endif
 }
 #endif
 

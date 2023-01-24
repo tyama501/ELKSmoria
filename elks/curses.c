@@ -172,7 +172,7 @@ int mvaddstr(int y ,int x, char * str)
 {
     int i = 0;
 
-    while (str[i]!="\0" && i < 80) {
+    while (str[i]!='\0' && i < COLS) {
        mvaddch(y,x+i,str[i]);
        i++;
     }
