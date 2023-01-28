@@ -1126,14 +1126,13 @@ int row;
 {
 #ifdef ELKS
   int i;
-#endif
 
-  (void) move(row, 0);
-
-#ifdef ELKS
-  for (i = 0; i < (LINES - row); i++)
-    clrnl();
+  for (i = 0; i < (LINES - row); i++) {
+    (void) move(row + i, 0);
+    clrtoeol();
+  }
 #else
+  (void) move(row, 0);
   clrtobot();
 #endif
 }
