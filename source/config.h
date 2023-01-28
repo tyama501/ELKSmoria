@@ -245,7 +245,7 @@ some of the system defines set up here.
 #ifdef ELKS
 #define MORIA_SAV	"morisave"
 #define MORIA_HOU	"./files/hours"
-#define MORIA_MOR	"./files/news"
+#define MORIA_MOR	"./morifile/news_elks"
 #define MORIA_GPL	"./files/COPYING"
 #define MORIA_TOP	"./files/scores"
 #define MORIA_HELP	"./files/roglcmds.hlp"

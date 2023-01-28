@@ -248,10 +248,6 @@ char *argv[];
 #endif
 #endif
 
-#ifdef ELKS
-  printf("Welcome to ELKSmoria!\n");
-#endif
-
   /* use curses */
   init_curses();
 
