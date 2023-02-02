@@ -1070,7 +1070,11 @@ int row1, col1, row2, col2;
   register int tmp_row, tmp_col, i, j;
   register cave_type *c_ptr;
   cave_type *d_ptr;
+#ifdef ELKS
+  coords tunstk[80], wallstk[80];
+#else
   coords tunstk[1000], wallstk[1000];
+#endif
   coords *tun_ptr;
   int row_dir, col_dir, tunindex, wallindex;
   int stop_flag, door_flag, main_loop_count;
@@ -1117,7 +1121,11 @@ int row1, col1, row2, col2;
 	{
 	  row1 = tmp_row;
 	  col1 = tmp_col;
+#ifdef ELKS
+	  if (tunindex < 80)
+#else
 	  if (tunindex < 1000)
+#endif
 	    {
 	      tunstk[tunindex].y = row1;
 	      tunstk[tunindex].x = col1;
@@ -1132,7 +1140,11 @@ int row1, col1, row2, col2;
 	{
 	  row1 = tmp_row;
 	  col1 = tmp_col;
+#ifdef ELKS
+	  if (wallindex < 80)
+#else
 	  if (wallindex < 1000)
+#endif
 	    {
 	      wallstk[wallindex].y = row1;
 	      wallstk[wallindex].x = col1;
@@ -1264,18 +1276,30 @@ static void cave_gen()
       int endx;
       int endy;
     };
+#ifdef ELKS
+  int room_map[2][2];
+#else
   int room_map[20][20];
+#endif
   register int i, j, k;
   int y1, x1, y2, x2, pick1, pick2, tmp;
   int row_rooms, col_rooms, alloc_level;
+#ifdef ELKS
+  int16 yloc[4], xloc[4];
+#else
   int16 yloc[400], xloc[400];
+#endif
 
   row_rooms = 2*(cur_height/SCREEN_HEIGHT);
   col_rooms = 2*(cur_width /SCREEN_WIDTH);
   for (i = 0; i < row_rooms; i++)
     for (j = 0; j < col_rooms; j++)
       room_map[i][j] = FALSE;
+#ifdef ELKS
+  k = randint(4);
+#else
   k = randnor(DUN_ROO_MEA, 2);
+#endif
   for (i = 0; i < k; i++)
     room_map[randint(row_rooms)-1][randint(col_rooms)-1] = TRUE;
   k = 0;
@@ -1356,11 +1380,13 @@ static void cave_gen()
   /* Set up the character co-ords, used by alloc_monster, place_win_monster */
   new_spot(&char_row, &char_col);
   alloc_monster((randint(8)+MIN_MALLOC_LEVEL+alloc_level), 0, TRUE);
+#ifndef ELKS
   alloc_object(set_corr, 3, randint(alloc_level));
   alloc_object(set_room, 5, randnor(TREAS_ROOM_ALLOC, 3));
   alloc_object(set_floor, 5, randnor(TREAS_ANY_ALLOC, 3));
   alloc_object(set_floor, 4, randnor(TREAS_GOLD_ALLOC, 3));
   alloc_object(set_floor, 1, randint(alloc_level));
+#endif
   if (dun_level >= WIN_MON_APPEAR)  place_win_monster();
 }
 
