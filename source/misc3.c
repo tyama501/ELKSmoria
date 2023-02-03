@@ -208,8 +208,10 @@ int typ, num;
 	else	      place_rubble(i, j); /* typ == 3 */
 #endif
       } else {
+#ifndef ELKS
 	if (typ == 4) place_gold(i, j); /* typ == 4 */
 	else	      place_object(i, j, FALSE); /* typ == 5 */
+#endif
       }
     }
 }

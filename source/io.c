@@ -1592,8 +1592,12 @@ void save_screen()
 
 void restore_screen()
 {
+#ifdef ELKS
+  draw_cave();
+#else
   overwrite(savescr, stdscr);
   touchwin(stdscr);
+#endif
 }
 #endif
 

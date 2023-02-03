@@ -1386,9 +1386,11 @@ static void cave_gen()
 #endif
 #ifndef ELKS
   alloc_object(set_corr, 3, randint(alloc_level));
+#endif
   alloc_object(set_room, 5, randnor(TREAS_ROOM_ALLOC, 3));
   alloc_object(set_floor, 5, randnor(TREAS_ANY_ALLOC, 3));
   alloc_object(set_floor, 4, randnor(TREAS_GOLD_ALLOC, 3));
+#ifndef ELKS
   alloc_object(set_floor, 1, randint(alloc_level));
 #endif
   if (dun_level >= WIN_MON_APPEAR)  place_win_monster();
