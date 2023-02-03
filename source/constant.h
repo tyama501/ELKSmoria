@@ -191,7 +191,11 @@ some of the system defines set up there.
 #define MAX_MON_MULT	   75 /* Maximum reproductions on a level      */
 #define MON_MULT_ADJ	    7 /* High value slows multiplication       */
 #define MON_NASTY	   50 /* 1/x chance of high level creat		*/
+#ifdef ELKS
+#define MIN_MALLOC_LEVEL   2 /* Minimum number of monsters/level      */
+#else
 #define MIN_MALLOC_LEVEL   14 /* Minimum number of monsters/level      */
+#endif
 #define MIN_MALLOC_TD	    4 /* Number of people on town level (day)  */
 #define MIN_MALLOC_TN	    8 /* Number of people on town level (night)*/
 #define WIN_MON_TOT	    2 /* Total number of "win" creatures       */

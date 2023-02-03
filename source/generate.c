@@ -1379,7 +1379,11 @@ static void cave_gen()
   place_stairs(1, randint(2), 3);
   /* Set up the character co-ords, used by alloc_monster, place_win_monster */
   new_spot(&char_row, &char_col);
+#ifdef ELKS
+  alloc_monster((randint(2)+MIN_MALLOC_LEVEL+alloc_level), 0, TRUE);
+#else
   alloc_monster((randint(8)+MIN_MALLOC_LEVEL+alloc_level), 0, TRUE);
+#endif
 #ifndef ELKS
   alloc_object(set_corr, 3, randint(alloc_level));
   alloc_object(set_room, 5, randnor(TREAS_ROOM_ALLOC, 3));
