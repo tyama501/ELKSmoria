@@ -202,8 +202,8 @@ static int sv_write()
 	  wr_bytes(r_ptr->r_attacks, MAX_MON_NATTACK);
 	}
     }
-#endif
   wr_short((int16u)0xFFFF); /* sentinel to indicate no more monster info */
+#endif
 
   wr_long(l);
 
