@@ -650,7 +650,14 @@ char *fnam;
       return FALSE;
     }
   else
+#ifdef ELKS
+    {
+      sync();
+#endif
     character_saved = 1;
+#ifdef ELKS
+    }
+#endif
 
   turn = -1;
   signals();
