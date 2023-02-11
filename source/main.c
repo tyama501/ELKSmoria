@@ -313,9 +313,9 @@ char *argv[];
 
   /* Init monster and treasure levels for allocate */
   init_m_level();
-#ifndef ELKS
   init_t_level();
 
+#ifndef ELKS
   /* Init the store inventories			*/
   store_init();
 #endif
