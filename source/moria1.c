@@ -328,7 +328,11 @@ char *mask;
   register int i;
   int total_weight, len, l, lim, current_line;
   bigvtype tmp_val;
+#ifdef ELKS
+  vtype out_val[10];
+#else
   vtype out_val[23];
+#endif
 
   len = 79 - col;
   if (weight)

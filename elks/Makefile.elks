@@ -44,7 +44,7 @@ OBJS = main.o misc1.o misc3.o misc4.o files.o io.o \
 all: $(PRGS) $(PRGS_HOST)
 
 elksmoria: $(OBJS) curses.o curses2.o $(TUILIB)
-	$(LD) $(LDFLAGS) -maout-heap=0xffff -maout-stack=1024 -o $@ $^ $(LDLIBS)
+	$(LD) $(LDFLAGS) -maout-heap=0xffff -maout-stack=2048 -o $@ $^ $(LDLIBS)
 
 install: $(PRGS)
 	$(INSTALL) $(PRGS) $(DESTDIR)/bin
