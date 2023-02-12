@@ -265,6 +265,9 @@ int show_player;
   int16 player_uid;
 #endif
 
+#ifdef ELKS
+  highscore_fp = fopen(MORIA_TOP, "a+");
+#else
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
 #if defined(MAC) || defined(MSDOS)
   if ((highscore_fp = fopen(MORIA_TOP, "rb")) == NULL)
@@ -277,6 +280,7 @@ int show_player;
       msg_print(CNIL);
       return;
     }
+#endif
 #endif
 
 #ifndef BSD4_3
@@ -302,7 +306,7 @@ int show_player;
       msg_print("Sorry. This scorefile is from a different version of \
 umoria.");
       msg_print (CNIL);
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(ELKS)
       (void) fclose (highscore_fp);
 #endif
       return;
@@ -359,7 +363,7 @@ umoria.");
       if (input == ESCAPE)
 	break;
     }
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO) || defined(ELKS)
   (void) fclose (highscore_fp);
 #endif
 }
@@ -380,6 +384,9 @@ int duplicate_character ()
   char string[80];
 #endif
 
+#ifdef ELKS
+  highscore_fp = fopen(MORIA_TOP, "a+");
+#else
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
 #if defined(MAC) || defined(MSDOS)
   if ((highscore_fp = fopen(MORIA_TOP, "rb")) == NULL)
@@ -392,6 +399,7 @@ int duplicate_character ()
       msg_print(CNIL);
       return FALSE;
     }
+#endif
 #endif
 
 #ifndef BSD4_3
@@ -417,7 +425,7 @@ int duplicate_character ()
       msg_print("Sorry. This scorefile is from a different version of \
 umoria.");
       msg_print (CNIL);
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)|| defined(ELKS)
       (void) fclose (highscore_fp);
 #endif
       return FALSE;
@@ -447,7 +455,7 @@ umoria.");
 
       rd_highscore(&score);
     }
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(ELKS)
   (void) fclose (highscore_fp);
 #endif
 
@@ -686,6 +694,9 @@ are not saved.");
     }
   (void) strcpy(new_entry.died_from, tmp);
 
+#ifdef ELKS
+  highscore_fp = fopen(MORIA_TOP, "a+");
+#else
   /*  First, get a lock on the high score file so no-one else tries */
   /*  to write to it while we are using it, on VMS and IBMPCs only one
       process can have the file open at a time, so we just open it here */
@@ -711,6 +722,7 @@ are not saved.");
       msg_print(CNIL);
       return;
     }
+#endif
 #endif
 #endif
 
@@ -763,7 +775,7 @@ are not saved.");
     {
       /* No need to print a message, a subsequent call to display_scores()
 	 will print a message.  */
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(ELKS)
       (void) fclose (highscore_fp);
 #endif
       return;
@@ -791,7 +803,7 @@ are not saved.");
 	       && new_entry.race == old_entry.race
 	       && new_entry.class == old_entry.class)
 	{
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO) || defined(ELKS)
 	  (void) fclose (highscore_fp);
 #endif
 	  return;
@@ -799,7 +811,7 @@ are not saved.");
       else if (++i >= SCOREFILE_SIZE)
 	{
 	  /* only allow one thousand scores in the score file */
-#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC)
+#if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(ELKS)
 	  (void) fclose (highscore_fp);
 #endif
 	  return;
@@ -877,7 +889,7 @@ are not saved.");
 	}
     }
 
-#if !defined(VMS) && !defined(MSDOS) && !defined(AMIGA) && !defined(MAC) && !defined(APOLLO)
+#if !defined(VMS) && !defined(MSDOS) && !defined(AMIGA) && !defined(MAC) && !defined(APOLLO) && !defined(ELKS)
 #ifdef ATARIST_TC
   /* Flock never called for Atari ST with TC.  */
 #else

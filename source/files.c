@@ -93,8 +93,17 @@ void init_scorefile()
 	}
       setfileinfo (MORIA_TOP, currentdirectory (), SCORE_FTYPE);
 #else
+#ifdef ELKS
+      highscore_fp = fopen (MORIA_TOP, "w+");	/* Create it if not there.  */
+      if (highscore_fp == NULL)
+	{
       (void) fprintf (stderr, "Can't open score file \"%s\"\n", MORIA_TOP);
       exit(1);
+    }
+#else
+      (void) fprintf (stderr, "Can't open score file \"%s\"\n", MORIA_TOP);
+      exit(1);
+#endif
 #endif
     }
 #if defined(MSDOS) || defined(VMS) || defined(MAC) || defined(APOLLO)

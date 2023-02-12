@@ -165,7 +165,11 @@ static void choose_race()
   l = 2;
   m = 21;
   clear_from (20);
+#ifdef ELKS
+  put_buffer("Choose a race :", 20, 2);
+#else
   put_buffer("Choose a race (? for Help):", 20, 2);
+#endif
   do
     {
       (void) sprintf(tmp_str, "%c) %s", k+'a', race[j].trace);
@@ -188,8 +192,10 @@ static void choose_race()
       j = s - 'a';
       if ((j < MAX_RACES) && (j >= 0))
 	exit_flag = TRUE;
+#ifndef ELKS
       else if (s == '?')
 	helpfile (MORIA_WELCOME);
+#endif
       else
 	bell ();
     }
@@ -308,7 +314,11 @@ static void get_sex()
 
   exit_flag = FALSE;
   clear_from (20);
+#ifdef ELKS
+  put_buffer("Choose a sex :", 20, 2);
+#else
   put_buffer("Choose a sex (? for Help):", 20, 2);
+#endif
   put_buffer("m) Male       f) Female", 21, 2);
   do
     {
@@ -327,8 +337,10 @@ static void get_sex()
 	  put_buffer("Male", 4, 15);
 	  exit_flag = TRUE;
 	}
+#ifndef ELKS
       else if (c == '?')
 	helpfile (MORIA_WELCOME);
+#endif
       else
 	bell ();
     }
@@ -378,7 +390,15 @@ static void get_class()
   m = 21;
   mask = 0x1;
   clear_from (20);
+#ifdef ELKS
+#ifdef ELKS_WARRIOR
+  put_buffer("Choose a class (ELKS: Sorry, Warrior only):", 20, 2);
+#else
+  put_buffer("Choose a class :", 20, 2);
+#endif
+#else
   put_buffer("Choose a class (? for Help):", 20, 2);
+#endif
   do
     {
       if (race[i].rtclass & mask)
@@ -476,8 +496,10 @@ static void get_class()
 	  m_ptr->save += c_ptr->msav;
 	  m_ptr->expfact += c_ptr->m_exp;
 	}
+#ifndef ELKS
       else if (s == '?')
 	helpfile (MORIA_WELCOME);
+#endif
       else
 	bell ();
     }

@@ -1664,10 +1664,12 @@ char com_val;
     case 'Z':		/* (Z)ap a staff	(u)se a staff */
       use();
       break;
+#ifndef ELKS
     case 'v':		/* (v)ersion of game */
       helpfile(MORIA_VER);
       free_turn_flag = TRUE;
       break;
+#endif
     case 'w':		/* (w)ear or wield */
       inven_command('w');
       break;

@@ -25,11 +25,14 @@ Constant.h should always be included after config.h, because it uses
 some of the system defines set up here.
 #endif
 
+#ifdef ELKS
+#define WIZARD	"https://github.com/tyama501/ELKSmoria"
+#else
 /* Person to bother if something goes wrong.  */
 /* Recompile files.c and misc2.c if this changes.  */
 #define WIZARD	"David Grabiner <grabiner@alumni.princeton.edu>"
 /* The wizard password and wizard uid are no longer used.  */
-
+#endif
 
 /* System definitions.  You must define one of these as appropriate for
    the system you are compiling moria on.  */
@@ -244,16 +247,11 @@ some of the system defines set up here.
 #else
 #ifdef ELKS
 #define MORIA_SAV	"morisave"
-#define MORIA_HOU	"./files/hours"
-#define MORIA_MOR	"./morifile/news_elks"
-#define MORIA_GPL	"./files/COPYING"
-#define MORIA_TOP	"./files/scores"
-#define MORIA_HELP	"./files/roglcmds.hlp"
-#define MORIA_ORIG_HELP	"./files/origcmds.hlp"
-#define MORIA_WIZ_HELP	"./files/rwizcmds.hlp"
-#define MORIA_OWIZ_HELP	"./files/owizcmds.hlp"
-#define MORIA_WELCOME	"./files/welcome.hlp"
-#define MORIA_VER	"./files/version.hlp"
+#define MORIA_MOR	"./morifile/newselks"
+#define MORIA_GPL	"./morifile/license"
+#define MORIA_TOP	"moriscor"
+#define MORIA_HELP	"./morifile/roglcmds"
+#define MORIA_ORIG_HELP	"./morifile/origcmds"
 
 #else
 /* Generic UNIX */

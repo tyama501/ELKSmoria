@@ -14,14 +14,14 @@ include $(BASEDIR)/Make.rules
 
 ###############################################################################
 
-PRGS = elksmoria
+PRGS = elksmori
 
 #PRGS_HOST =
 
 #CFLAGS += -DELKS=1
 CFLAGS += -DELKS=1 -DELKS_WARRIOR
 
-LDFLAGS += -Wl,-Map=elksmoria.map
+LDFLAGS += -Wl,-Map=elksmori.map
 
 #TUILIB = tty.o runes.o unikey.o
 TUILIB = tty.o unikey.o
@@ -43,7 +43,7 @@ OBJS = main.o misc1.o misc3.o misc4.o files.o io.o \
 
 all: $(PRGS) $(PRGS_HOST)
 
-elksmoria: $(OBJS) curses.o curses2.o $(TUILIB)
+elksmori: $(OBJS) curses.o curses2.o $(TUILIB)
 	$(LD) $(LDFLAGS) -maout-heap=0xffff -maout-stack=2048 -o $@ $^ $(LDLIBS)
 
 install: $(PRGS)

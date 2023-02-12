@@ -770,10 +770,12 @@ void shell_out()
       (void) ioctl(0, TIOCSETC, (char *)&save_tchars);
       (void) ioctl(0, TIOCLSET, (char *)&save_local_chars);
 #endif
+#ifndef ELKS
 #ifndef MSDOS
       /* close scoreboard descriptor */
       /* it is not open on MSDOS machines */
       (void) fclose(highscore_fp);
+#endif
 #endif
       if (str = getenv("SHELL"))
 #ifndef ATARI_ST
