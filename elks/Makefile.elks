@@ -43,7 +43,7 @@ OBJS = main.o misc1.o misc3.o misc4.o files.o io.o \
 
 all: $(PRGS) $(PRGS_HOST)
 
-elksmori: $(OBJS) curses.o curses2.o $(TUILIB)
+elksmori: $(OBJS) curses.o curses2.o curses3.o $(TUILIB)
 	$(LD) $(LDFLAGS) -maout-heap=0xffff -maout-stack=2240 -o $@ $^ $(LDLIBS)
 
 install: $(PRGS)

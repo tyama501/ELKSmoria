@@ -248,6 +248,10 @@ static WINDOW *tempscr;		/* Spare window for VMS CTRL('R'). */
 #endif
 #endif
 
+#ifdef ELKS
+static WINDOW *curscr;
+#endif
+
 #ifdef MAC
 /* Attributes of normal and hilighted characters */
 #define ATTR_NORMAL	attrNormal
@@ -421,7 +425,11 @@ void moriaterm()
 #ifdef __linux__
   struct termios tbuf;
 #else
+#ifdef ELKS
+  struct termios tbuf;
+#else
   struct termio tbuf;
+#endif
 #endif
 #else
   struct ltchars lbuf;
@@ -576,7 +584,7 @@ void restore_term()
 #endif
   /* this moves curses to bottom right corner */
 #ifdef ELKS
-  mvcur(((WINDOW *) stdscr)->_cury, ((WINDOW *) stdscr)->_curx, LINES-1, 0);
+  mvcur(0, 0, LINES-1, 0);
 #else
   mvcur(stdscr->_cury, stdscr->_curx, LINES-1, 0);
 #endif
@@ -686,7 +694,11 @@ void shell_out()
 #ifdef __linux__
   struct termios tbuf;
 #else
+#ifdef ELKS
+  struct termios tbuf;
+#else
   struct termio tbuf;
+#endif
 #endif
 #endif
 #else

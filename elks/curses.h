@@ -10,8 +10,11 @@
 #define KEY_END         kEnd
 #define KEY_NPAGE       kPageDown
 #define KEY_PPAGE       kPageUp
+#define KEY_RESIZE      kHome       /* dup */
 
-#define A_NORMAL        0x0700
+#define A_NORMAL        0x0000
+#define A_BLINK         0x0100
+#define A_BOLD          0x0200
 
 #define COLOR_BLACK         0
 #define COLOR_BLUE          1
@@ -43,21 +46,27 @@ extern int COLS;
 extern void *stdscr;
 
 void start_color();
-void use_default_colors();
+int use_default_colors();
 void init_pair(int ndx, int fg, int bg);
 void *initscr();
 void endwin();
 int has_colors();
-void cbreak();
-void noecho();
-void nonl();
-void intrflush(void *, int);
-void keypad(void *, int);
-void echo();
 void erase();
+void nodelay();
+#define cbreak()
+#define noecho()
+#define echo()
+#define nonl()
+#define intrflush(w,flag)
+#define keypad(scr,flag)
+#define timeout(t)
+#define leaveok(w,f)
+#define scrollok(w,f)
+#define clear()             erase()
+#define werase(w)           erase()
+#define wgetch(w)           getch()
 
 void curs_set(int cursoron);
-void timeout(int t);
 void move(int y, int x);
 void clrnl(void);
 void clrtoeos(void);
@@ -69,31 +78,41 @@ void wgetnstr(void *, char *, int);
 void attron(int a);
 void attroff(int a);
 
-void scrollok(void *,int);
-void leaveok(void *,int);
-void nodelay(void *,int);
 void refresh();
 void mvcur(int,int,int,int);
 int mvaddch(int,int,int);
+int addch(int);
 
-// T.Yamada modified
-typedef struct {
-    int _cury;
-    int _curx;
+typedef struct screen {
+} SCREEN;
+
+typedef struct window {
 } WINDOW;
 
-extern WINDOW *curscr;
+typedef int chtype;
 
-WINDOW *newwin(int,int,int,int);
-int wrefresh(WINDOW *);
+/* partially implemented functions for ttyclock */
+void mvwaddch(WINDOW *w, int y, int x, int ch);
+void mvwaddstr(WINDOW *w, int y, int x, char *str);
+void mvwprintw(WINDOW *w, int y, int x, char *fmt, ...);
+void mvwin(WINDOW *w, int y, int x);
+void wrefresh(WINDOW *w);
+#define newterm(type,ofd,ifd)   NULL
+#define newwin(l,c,y,x)         NULL
+#define delscreen(s)
+#define set_term(s)
+#define clearok(w,flag)
+#define box(w,y,x)
+#define wborder(w,a,b,c,d,e,f,g,h)
+#define wresize(win,h,w)
+void wattron(WINDOW *w, int a);
+void wattroff(WINDOW *w, int a);
+void wbkgdset(WINDOW *w, int a);
+
+// T.Yamada modified
 void getyx(WINDOW *, int, int);
 int overwrite(WINDOW *, WINDOW *);
-int touchwin(WINDOW *);
-
-int addch(int);
 int mvaddstr(int,int, char *);
 int addstr(char *);
-int clear(void);
-int clrtobot(void);
 int crmode(void);
 int nocrmode(void);

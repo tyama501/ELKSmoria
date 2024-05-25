@@ -19,10 +19,13 @@ int LINES = 25;
 int COLS = 80;
 void *stdscr;
 
+//static int xoff, yoff;
+
 void *initscr()
 {
     tty_init(MouseTracking|CatchISig|FullBuffer);
-    tty_getsize(&COLS, &LINES);
+    if (isatty(1))
+        tty_getsize(&COLS, &LINES);
     return stdout;
 }
 
@@ -37,44 +40,12 @@ int has_colors()
     return 1;
 }
 
-void cbreak()
-{
-}
-
-void noecho()
-{
-}
-
-void nonl()
-{
-}
-
-void intrflush(void *win, int bf)
-{
-}
-
-void keypad(void *win, int bf)
-{
-}
-
-void echo()
-{
-}
-
-void timeout(int t)
-{
-}
-
-void leaveok(void *win, int flag)
-{
-}
-
 void nodelay(void *win, int flag)
 {
-}
-
-void scrollok(void *win, int flag)
-{
+    if (flag) {
+        _tty_flags |= NoWait;
+        tty_enable_unikey();
+    }
 }
 
 void refresh()
@@ -85,6 +56,12 @@ void refresh()
 void mvcur(int oy, int ox, int y, int x)
 {
     move(y, x);
+}
+
+int addch(int ch)
+{
+    putchar(ch);
+    return OK;
 }
 
 int mvaddch(int y, int x, int ch)
@@ -107,6 +84,8 @@ void erase()
 
 void move(int y, int x)
 {
+    //y += yoff;
+    //x += xoff;
     printf("\e[%d;%dH", y+1, x+1);
 }
 
@@ -135,35 +114,11 @@ void printw(char *fmt, ...)
 }
 
 // T.Yamada modified
-WINDOW *curscr;
-
-WINDOW *newwin(int nlines,int ncols,int begin_y,int begin_x)
-{
-    WINDOW *win;
-
-    return win;
-}
-
-int wrefresh(WINDOW *win)
-{
-    return OK;
-}
-
 void getyx(WINDOW *win, int y, int x)
 {
 }
 
 int overwrite(WINDOW *srcwin, WINDOW *dstwin)
-{
-    return OK;
-}
-
-int touchwin(WINDOW *win)
-{
-    return OK;
-}
-
-int addch(int ch)
 {
     return OK;
 }
@@ -181,19 +136,6 @@ int mvaddstr(int y ,int x, char * str)
 }
 
 int addstr(char * str)
-{
-    return OK;
-}
-
-int clear(void)
-{
-    erase();
-    refresh();
-
-    return OK;
-}
-
-int clrtobot(void)
 {
     return OK;
 }

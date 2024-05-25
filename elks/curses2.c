@@ -75,8 +75,9 @@ void start_color()
 {
 }
 
-void use_default_colors()
+int use_default_colors()
 {
+    return OK;
 }
 
 struct cp {
