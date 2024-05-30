@@ -1855,7 +1855,9 @@ char c;
     case '*':
     case ':':
     case CTRL('T'):
+#ifndef ELKS
     case CTRL('E'):
+#endif
     case CTRL('F'):
     case CTRL('S'):
     case CTRL('Q'):

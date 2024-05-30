@@ -561,7 +561,11 @@ void create_character()
   put_stats();
 
   clear_from (20);
+#ifdef ELKS
+  put_buffer("Hit space to reroll or CTRL-E to accept characteristics: ", 20, 2);
+#else
   put_buffer("Hit space to reroll or ESC to accept characteristics: ", 20, 2);
+#endif
   do
     {
       move_cursor (20, 56);

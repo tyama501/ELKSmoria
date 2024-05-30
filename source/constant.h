@@ -288,7 +288,11 @@ some of the system defines set up there.
 #ifdef VMS
 #define ESCAPE        '\032'	/* Use CTRL-Z instead of ESCAPE.  */
 #else
+#ifdef ELKS
+#define ESCAPE	      '\005'	/* Use CTRL-E instead of ESCAPE.  */
+#else
 #define ESCAPE	      '\033'	/* ESCAPE character -CJS-  */
+#endif
 #endif
 
 /* This used to be NULL, but that was technically incorrect.  CNIL is used
