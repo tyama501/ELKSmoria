@@ -1,4 +1,4 @@
-Command summary: (@ is optional count, ~ is direction, ^R redraws, ESC aborts)
+Command summary: (@ is optional count, ~ is direction, ^R redraws, ^E aborts)
                                        | @ B ~      Bash item or monster
                                        |   C        Character description
   c ~      Close a door                | @ D ~      Disarm a trap/chest
@@ -39,7 +39,7 @@ Control-R will redraw the screen whenever it is input, not only at command
 level. Control commands may be entered with a single key stroke, or with two
 key strokes by typing ^ and then a letter.
 
-Type ESCAPE to abort the look command at any point.
+Type Control-E to abort the look command at any point.
 
 Some commands will prompt for a spell, or an inventory item. Selection is
 by an alphabetic character - entering a capital causes a desription to be

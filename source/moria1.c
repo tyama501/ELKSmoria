@@ -634,7 +634,11 @@ int new_scr;
 	case HELP_SCR:
 	  if (scr_left > 52)
 	    scr_left = 52;
+#ifdef ELKS
+	  prt("  CTRL-E: exit", 1, scr_left);
+#else
 	  prt("  ESC: exit", 1, scr_left);
+#endif
 	  prt("  w  : wear or wield object", 2, scr_left);
 	  prt("  t  : take off item", 3, scr_left);
 	  prt("  d  : drop object", 4, scr_left);
@@ -883,7 +887,11 @@ char command;
 	      else
 		disp = "";
 	      (void) sprintf(prt1,
+#ifdef ELKS
+	            "(%c-%c%s%s%s, space to break, CTRL-E to exit) %s which one?",
+#else
 	            "(%c-%c%s%s%s, space to break, ESC to exit) %s which one?",
+#endif
 		    from+'a', to+'a', disp, swap, 
 	            ((command == 'w' || command == 'd') ? ", 0-9" : "")
 		    , prompt);
@@ -1251,7 +1259,11 @@ char command;
 	  else
 	    prt("Allowed commands:", 0, 0);
 	  erase_line(scr_base, scr_left);
+#ifdef ELKS
+	  put_buffer("e/i/t/w/x/d/?/CTRL-E:", scr_base, 55);
+#else
 	  put_buffer("e/i/t/w/x/d/?/ESC:", scr_base, 60);
+#endif
 	  command = inkey();
 	  erase_line(scr_base, scr_left);
 	}
@@ -1307,14 +1319,22 @@ char *message;
 	    }
 	  if (full)
 	    (void) sprintf(out_val,
+#ifdef ELKS
+			   "(%s: %c-%c,%s%s / for %s, or CTRL-E) %s",
+#else
 			   "(%s: %c-%c,%s%s / for %s, or ESC) %s",
+#endif
 			   (i_scr > 0 ? "Inven" : "Equip"), i+'a', j+'a',
 			   (i_scr > 0 ? " 0-9," : ""),
 			   (redraw ? "" : " * to see,"),
 			   (i_scr > 0 ? "Equip" : "Inven"), pmt);
 	  else
 	    (void) sprintf(out_val,
+#ifdef ELKS
+			   "(Items %c-%c,%s%s CTRL-E to exit) %s",
+#else
 			   "(Items %c-%c,%s%s ESC to exit) %s", 
+#endif
 			   i+'a', j+'a',			   
 			   (i_scr > 0 ? " 0-9," : ""),
 			   (redraw ? "" : " * for inventory list,"), pmt);
