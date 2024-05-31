@@ -39,6 +39,20 @@ You can attack monsters by just moving toward them.
 
 Ctrl-X will save the game and Exit.
 
+## How to build
+Link $TOPDIR of the ELKS repository as elks_repository in the source directory of this repository.  
+Link files in elks directory in the source directory.  
+Link unix.c in unix directory in the source directory.
+
+cd source  
+ln -s $TOPDIR elks_repository  
+ln -s ../elks/\*.\* .  
+ln -s ../unix/unix.c .  
+mv Makefile.elks Makefile  
+
+make clean  
+make  
+
 The following text is the README of the original repository.
 
 ----------------------------------------------------------------------
