@@ -266,7 +266,8 @@ int show_player;
 #endif
 
 #ifdef ELKS
-  highscore_fp = fopen(MORIA_TOP, "a+");
+  if ((highscore_fp = fopen(MORIA_TOP, "r")) == NULL)
+    return;
 #else
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
 #if defined(MAC) || defined(MSDOS)
@@ -385,7 +386,8 @@ int duplicate_character ()
 #endif
 
 #ifdef ELKS
-  highscore_fp = fopen(MORIA_TOP, "a+");
+  if ((highscore_fp = fopen(MORIA_TOP, "r")) == NULL)
+    return;
 #else
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)
 #if defined(MAC) || defined(MSDOS)
@@ -695,7 +697,11 @@ are not saved.");
   (void) strcpy(new_entry.died_from, tmp);
 
 #ifdef ELKS
-  highscore_fp = fopen(MORIA_TOP, "a+");
+  if ((highscore_fp = fopen(MORIA_TOP, "r+")) == NULL)
+    {
+      if ((highscore_fp = fopen(MORIA_TOP, "w+")) == NULL)
+        return;
+    }
 #else
   /*  First, get a lock on the high score file so no-one else tries */
   /*  to write to it while we are using it, on VMS and IBMPCs only one
