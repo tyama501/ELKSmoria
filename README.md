@@ -11,10 +11,10 @@ Now I am triying to create a Warrior only game with a few treasures on the field
 ## How to play
 Please place the following files under the morifile directory of the current directory.
 
-./morifile/license
-./morifile/newselks
-./morifile/origcmds
-./morifile/roglcmds
+./morifile/license  
+./morifile/newselks  
+./morifile/origcmds  
+./morifile/roglcmds  
 
 morisave and moriscor files are also created under the current directory after save the game.
 
