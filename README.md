@@ -18,38 +18,36 @@ Please place the following files under the morifile directory of the current dir
 
 morisave and moriscor files are also created under the current directory after save the game.
 
-When starting the new game, you can select whether you use the Umoria original key or Rougue key.
-./elksmori without option will start the game with the former key which use numeric key(1-9) to move.
-./elksmori -r will start the game with the latter key which use "hjklyubn." key to move.
+When starting the new game, you can select whether you use the Umoria original key or Rougue key.  
+./elksmori without option will start the game with the former key which use numeric key(1-9) to move.  
+./elksmori -r will start the game with the latter key which use "hjklyubn." key to move.  
 
-You can see the help file for keys by hitting "?" after creating character and starting the game.
-Also, you can see what the character on the screen means by hitting "/" then the character.
+You can see the help file for keys by hitting "?" after creating character and starting the game.  
+Also, you can see what the character on the screen means by hitting "/" then the character.  
 
-First you will be in the Town(without any stores...).
-You can see "@" for player, ">" for down staircase to the dungeon, and maybe "P" for people.
-Go on the ">" and press ">" to step down.
+First you will be in the Town(without any stores...).  
+You can see "@" for player, ">" for down staircase to the dungeon, and maybe "P" for people.  
+Go on the ">" and press ">" to step down.  
 
-You have Soft Leather Armor, Cloak. Dagger, and 5 Woodden Torches at the beginning.
-Press "i" to see the inventory, then press "w" and select these to Wear/Wield.
+You have Soft Leather Armor, Cloak. Dagger, and 5 Woodden Torches at the beginning.  
+Press "i" to see the inventory, then press "w" and select these to Wear/Wield.  
 
-There is no potion at the begining, but you can heal yourself by
-hitting "5" for original key, "." for rogue key several times to spend turns.
+There is no potion at the begining, but you can heal yourself by  
+hitting "5" for original key, "." for rogue key several times to spend turns.  
 
-You can attack monsters by just moving toward them.
+You can attack monsters by just moving toward them.  
 
-Ctrl-X will save the game and Exit.
+Ctrl-X will save the game and Exit.  
 
 ## How to build
-Link $TOPDIR of the ELKS repository as elks_repository in the source directory of this repository.  
-Link files in elks directory in the source directory.  
-Link unix.c in unix directory in the source directory.
+Copy this repository under elkscmd directory in the ELKS repository or  
+Create a link to this repository in the elkscmd directory.  
+Set $TOPDIR by env.sh in the ELKS repository.   
+Then do make in this repository.  
 
-cd source  
-ln -s $TOPDIR elks_repository  
-ln -s ../elks/\*.\* .  
-ln -s ../unix/unix.c .  
-mv Makefile.elks Makefile  
-
+cd elks  
+. ./env.sh  
+cd elkscmd/ELKSmoria  
 make clean  
 make  
 
