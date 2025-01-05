@@ -1,30 +1,32 @@
 #BASEDIR=..
-BASEDIR=./elks_repository/elkscmd
-
-#include $(BASEDIR)/Make.defs
-
-# To use medium model
-include ./Make.defs
+BASEDIR=$(TOPDIR)/elkscmd
 
 ###############################################################################
 #
 # Include standard packaging commands.
 
-include $(BASEDIR)/Make.rules
+include $(BASEDIR)/Makefile-rules
+
+# To use medium model
+CLBASE =  -mcmodel=medium -melks-libc -mtune=i8086 -Wall -Os
+CLBASE += -msegment-relocation-stuff
+CLBASE += -fno-inline -fno-builtin-printf -fno-builtin-fprintf -ffunction-sections
+#CLBASE += -mregparmcall
+ifeq ($(CONFIG_APPS_FTRACE), y)
+    CLBASE += -fno-omit-frame-pointer -fno-optimize-sibling-calls
+    CLBASE += -finstrument-functions-simple -maout-symtab
+endif
 
 ###############################################################################
 
-PRGS = elksmori
-
-#PRGS_HOST =
-
-#CFLAGS += -DELKS=1
-CFLAGS += -DELKS=1 -DELKS_WARRIOR
-
+LOCALFLAGS = -DELKS=1 -DELKS_WARRIOR
+INCLUDES += -I./source -I./elks
 LDFLAGS += -Wl,-Map=elksmori.map
 
+PRGS = elksmori
+
 #TUILIB = tty.o runes.o unikey.o
-TUILIB = tty.o unikey.o
+TUILIB = elks/tty.o elks/unikey.o
 
 #OBJS = main.o misc1.o misc2.o misc3.o misc4.o store1.o files.o io.o \
 #	create.o desc.o generate.o sets.o dungeon.o creature.o death.o \
@@ -33,21 +35,21 @@ TUILIB = tty.o unikey.o
 #	moria3.o moria4.o monsters.o treasure.o variable.o rnd.o recall.o \
 #	unix.o player.o tables.o
 
-OBJS = main.o misc1.o misc3.o misc4.o files.o io.o \
-	create.o desc.o generate.o sets.o dungeon.o creature.o death.o \
-	eat.o help.o potions.o save.o staffs.o\
-	spells.o signals.o moria1.o moria2.o \
-	moria3.o moria4.o monsters.o treasure.o variable.o rnd.o recall.o \
-	unix.o player.o tables.o
+OBJS = source/main.o source/misc1.o source/misc3.o source/misc4.o source/files.o source/io.o \
+	source/create.o source/desc.o source/generate.o source/sets.o source/dungeon.o source/creature.o source/death.o \
+	source/eat.o source/help.o source/potions.o source/save.o source/staffs.o\
+	source/spells.o source/signals.o source/moria1.o source/moria2.o \
+	source/moria3.o source/moria4.o source/monsters.o source/treasure.o source/variable.o source/rnd.o source/recall.o \
+	source/player.o source/tables.o \
+	unix/unix.o
 
+all: $(PRGS)
 
-all: $(PRGS) $(PRGS_HOST)
-
-elksmori: $(OBJS) curses.o curses2.o curses3.o $(TUILIB)
+elksmori: $(OBJS) elks/curses.o elks/curses2.o elks/curses3.o $(TUILIB)
 	$(LD) $(LDFLAGS) -maout-heap=0xffff -maout-stack=2240 -o $@ $^ $(LDLIBS)
 
 install: $(PRGS)
 	$(INSTALL) $(PRGS) $(DESTDIR)/bin
 
 clean:
-	rm -f $(PRGS) $(PRGS_HOST) *~ *.o
+	rm -f $(PRGS) source/*.o unix/*.o elks/*.o

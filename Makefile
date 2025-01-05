@@ -1,0 +1,2 @@
+include elks/Makefile.elks
+

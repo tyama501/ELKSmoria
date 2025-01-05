@@ -23,7 +23,7 @@
 #include "types.h"
 #include "externs.h"
 
-#if defined(USG) && !defined(VMS) && !defined(MAC)
+#if defined(USG) && !defined(VMS) && !defined(MAC) && !defined(ELKS)
 #if !defined(ATARIST_MWC) && !defined(AMIGA)
 #if !defined(__TURBOC__)
 #include <memory.h>
@@ -35,7 +35,7 @@
 #endif
 #endif
 
-#if defined(MAC)
+#if defined(MAC) || defined(ELKS)
 #include <string.h>
 #endif
 
