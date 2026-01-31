@@ -1,2 +1,1 @@
-include elks/Makefile.elks
-
+include elks/Makefile.owc

@@ -1,0 +1,45 @@
+#BASEDIR=..
+BASEDIR=$(TOPDIR)/elkscmd
+COMPILER=WATCOM
+
+###############################################################################
+#
+# Include standard packaging commands.
+
+include $(BASEDIR)/Makefile-rules
+
+###############################################################################
+
+LOCALFLAGS = -DELKS=1 -DELKS_WARRIOR -zt1024
+INCLUDES += -I./source -I./elks
+
+PRGS = elksmori.os2
+
+#TUILIB = tty.obj runes.obj unikey.obj
+TUILIB = elks/tty.obj elks/unikey.obj
+
+#OBJS = main.obj misc1.obj misc2.obj misc3.obj misc4.obj store1.obj files.obj io.obj \
+#	create.obj desc.obj generate.obj sets.obj dungeon.obj creature.obj death.obj \
+#	eat.obj help.obj magic.obj potions.obj prayer.obj save.obj staffs.obj wands.obj \
+#	scrolls.obj spells.obj wizard.obj store2.obj signals.obj moria1.obj moria2.obj \
+#	moria3.obj moria4.obj monsters.obj treasure.obj variable.obj rnd.obj recall.obj \
+#	unix.obj player.obj tables.obj
+
+OBJS = source/main.obj source/misc1.obj source/misc3.obj source/misc4.obj source/files.obj source/io.obj \
+	source/create.obj source/desc.obj source/generate.obj source/sets.obj source/dungeon.obj source/creature.obj source/death.obj \
+	source/eat.obj source/help.obj source/potions.obj source/save.obj source/staffs.obj\
+	source/spells.obj source/signals.obj source/moria1.obj source/moria2.obj \
+	source/moria3.obj source/moria4.obj source/monsters.obj source/treasure.obj source/variable.obj source/rnd.obj source/recall.obj \
+	source/player.obj source/tables.obj \
+	unix/unix.obj
+
+all: $(PRGS)
+
+$(PRGS): $(OBJS) elks/curses.obj elks/curses2.obj elks/curses3.obj $(TUILIB)
+	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+install: $(PRGS)
+	$(INSTALL) $(PRGS) $(DESTDIR)/bin
+
+clean:
+	$(RM) $(PRGS) source/*.obj unix/*.obj elks/*.obj
