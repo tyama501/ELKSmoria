@@ -83,10 +83,13 @@ void mvcur(int,int,int,int);
 int mvaddch(int,int,int);
 int addch(int);
 
+/* structure contents unused, only typedefs needed */
 typedef struct screen {
+    int unused;
 } SCREEN;
 
 typedef struct window {
+    int unused;
 } WINDOW;
 
 typedef int chtype;
@@ -108,6 +111,9 @@ void wrefresh(WINDOW *w);
 void wattron(WINDOW *w, int a);
 void wattroff(WINDOW *w, int a);
 void wbkgdset(WINDOW *w, int a);
+
+/* partially implemented functions for invaders */
+void mvprintw(int y, int x, const char *fmt, ...);
 
 // T.Yamada modified
 void getyx(WINDOW *, int, int);
