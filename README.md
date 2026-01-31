@@ -3,8 +3,8 @@ This fork repository is to make a roguelike game for ELKS based on UMoria 5.6 an
 ELKS is the Embeddable Linux Kernel Subset in the following repository.  
 https://github.com/jbruchon/elks
 
-The code size is limitted to 128KB, and the data segment size is limitted to 64KB,
-so great amount of shrink is needed.
+To play the game with the limited size of the memory,  
+great amount of shrink is needed.
 
 Now I am triying to create a Warrior only game with a few treasures on the field without shops.
 
@@ -40,14 +40,16 @@ You can attack monsters by just moving toward them.
 Ctrl-X will save the game and Exit.  
 
 ## How to build
-Copy this repository under elkscmd directory in the ELKS repository or  
-Create a link to this repository in the elkscmd directory.  
-Set $TOPDIR by env.sh in the ELKS repository.   
-Then do make in this repository.  
+ELKS repository and OpenWatcom are needed to build.  
 
-cd elks  
+Set $TOPDIR by env.sh in the ELKS repository.  
+Set $WATCOM by wcenv.sh in the libc of the ELKS repository.  
+
+cd ../elks_repo  
 . ./env.sh  
-cd elkscmd/ELKSmoria  
+cd ../elks_repo/libc  
+. ./wcenv.sh  
+cd ../../ELKSmoria  
 make clean  
 make  
 
