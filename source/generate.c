@@ -466,6 +466,7 @@ int typ, num, walls;
 }
 
 
+#ifndef ELKS
 /* Place a trap with a given displacement of point	-RAK-	*/
 static void vault_trap(y, x, yd, xd, num)
 int y, x, yd, xd, num;
@@ -494,6 +495,7 @@ int y, x, yd, xd, num;
       while ((!flag) && (count <= 5));
     }
 }
+#endif
 
 
 /* Place a trap with a given displacement of point	-RAK-	*/
@@ -641,6 +643,7 @@ int yval, xval;
 }
 
 
+#ifndef ELKS
 /* Builds an unusual room at a row, column coordinate	-RAK-	*/
 /* Type 2 unusual rooms all have an inner room:			*/
 /*   1 - Just an inner room with one door			*/
@@ -1061,6 +1064,7 @@ int yval, xval;
       break;
     }
 }
+#endif
 
 
 /* Constructs a tunnel between two points		*/
@@ -1313,12 +1317,14 @@ static void cave_gen()
 	    {
 #ifdef ELKS
 	      tmp = 1;
+	      build_type1(yloc[k], xloc[k]);
 #else
 	      tmp = randint(3);
-#endif
+
 	      if (tmp == 1)	 build_type1(yloc[k], xloc[k]);
 	      else if (tmp == 2) build_type2(yloc[k], xloc[k]);
 	      else		 build_type3(yloc[k], xloc[k]);
+#endif
 	    }
 	  else
 	    build_room(yloc[k], xloc[k]);

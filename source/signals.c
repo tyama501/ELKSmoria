@@ -123,7 +123,7 @@ struct sigcontext *scp;
 
   smask = sigsetmask(0) | (1 << sig);
 #else
-#if defined(__TURBOC__) || defined(AMIGA)
+#if defined(__TURBOC__) || defined(AMIGA) || defined(ELKS)
 static void signal_handler(sig)
 #else
 static int signal_handler(sig)
@@ -242,7 +242,11 @@ void signals()
 #ifdef  __386BSD__
   (void) MSIGNAL(SIGTSTP, (sig_t)suspend);
 #else
+#ifdef ELKS
+  (void) MSIGNAL(SIGTSTP, (sighandler_t)suspend);
+#else
   (void) MSIGNAL(SIGTSTP, suspend);
+#endif
 #endif
 #endif
 #ifndef USG

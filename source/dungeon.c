@@ -2008,6 +2008,7 @@ register inven_type *t_ptr;
 }
 
 
+#ifndef ELKS_WARRIOR
 /* Examine a Book					-RAK-	*/
 static void examine_book()
 {
@@ -2065,6 +2066,7 @@ static void examine_book()
 	}
     }
 }
+#endif
 
 
 /* Go up one level					-RAK-	*/

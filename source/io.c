@@ -368,7 +368,11 @@ void init_curses()
   /* RENMOD: libc6 defaults to BSD, this expects SYSV */
   (void) sysv_signal (SIGTSTP, suspend);
 #else
+#ifdef ELKS
+  (void) signal (SIGTSTP, (sighandler_t)suspend);
+#else
   (void) signal (SIGTSTP, suspend);
+#endif
 #endif
 #endif
 #endif

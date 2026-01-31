@@ -155,7 +155,9 @@ extern int16 class_level_adj[MAX_CLASS][MAX_LEV_ADJ];
 #ifdef MACGAME
 extern spell_type (*magic_spell)[31];
 #else
+#ifndef ELKS_WARRIOR
 extern spell_type magic_spell[MAX_CLASS-1][31];
+#endif
 #endif
 extern char *spell_names[62];
 extern int32u spell_learned;	/* Bit field for spells learnt -CJS- */
