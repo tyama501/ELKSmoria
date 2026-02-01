@@ -395,6 +395,10 @@ void init_curses()
   (void) refresh();
   moriaterm ();
 
+#ifdef ELKS
+  curs_set(0);
+#endif
+
 #if 0
   /* This assumes that the terminal is 80 characters wide, which is not
      guaranteed to be true.  */
@@ -613,6 +617,9 @@ void restore_term()
 #if !defined(atarist) && !defined(__GNUC__)
   (void) ioctl(0, TIOCLSET, (char *)&save_local_chars);
 #endif
+#endif
+#ifdef ELKS
+  curs_set(1);
 #endif
   curses_on = FALSE;
 }
