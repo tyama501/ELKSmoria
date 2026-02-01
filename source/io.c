@@ -137,6 +137,8 @@ typedef struct { int stuff; } fpvmach;
 #else
 #ifdef ELKS
 #include <termios.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #endif
 #endif
 

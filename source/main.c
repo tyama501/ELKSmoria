@@ -143,6 +143,11 @@ void exit();
 #endif
 #endif
 
+#ifdef ELKS
+#include <unistd.h>
+#include <sys/types.h>
+#endif
+
 /*
 #if defined(atarist) && defined(__GNUC__)
 long _stksize = 64*1024;

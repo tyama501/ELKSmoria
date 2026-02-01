@@ -28,6 +28,11 @@
 #include "config.h"
 #include "constant.h"
 
+#ifdef ELKS
+#include <unistd.h>
+#include <sys/types.h>
+#endif
+
 /* Signals have no significance on the Mac */
 
 #ifdef MAC

@@ -131,6 +131,10 @@ static void kingly(void);
 #include <stdlib.h>
 #endif
 
+#ifdef ELKS
+#include <unistd.h>
+#endif
+
 #ifndef VMS
 #ifndef MAC
 #if !defined(ATARIST_MWC) && !defined(AMIGA) && !defined(ELKS)
