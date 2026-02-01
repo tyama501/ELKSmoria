@@ -42,9 +42,16 @@ char *strcat();
 #include <strings.h>
 #include <sys/file.h>
 #endif
+#ifndef ELKS
 #if defined(ultrix) || defined(USG)
 void exit();
 #endif
+#endif
+#endif
+
+#ifdef ELKS
+#include <stdlib.h>
+#include <unistd.h>
 #endif
 
 /* This must be included after fcntl.h, which has a prototype for `open'
@@ -125,6 +132,14 @@ void read_times()
   vtype in_line;
   register int i;
   FILE *file1;
+#ifdef ELKS
+  char dir_lib[] = MORIA_LIB;
+  char file_mor[] = MORIA_MOR;
+  char file_lib[sizeof(dir_lib)+sizeof(file_mor)];
+
+  strcpy(file_lib, dir_lib);
+  strcat(file_lib, file_mor);
+#endif
 
 #ifdef MORIA_HOU
   /* Attempt to read hours.dat.	 If it does not exist,	   */
@@ -179,7 +194,11 @@ void read_times()
 #endif
 
   /* Print the introduction message, news, etc.		 */
+#ifdef ELKS
+  if ((file1 = fopen(file_mor, "r")) != NULL || (file1 = fopen(file_lib, "r")) != NULL)
+#else
   if ((file1 = fopen(MORIA_MOR, "r")) != NULL)
+#endif
     {
       clear_screen();
 #ifdef VMS
@@ -207,8 +226,22 @@ char *filename;
   FILE *file;
   char input;
   int i;
+#ifdef ELKS
+  char dir_lib[] = MORIA_LIB;
+  char file_lib[sizeof(dir_lib)+25];
+
+  strcpy(file_lib, dir_lib);
+  strncat(file_lib, filename, 25);
+  file_lib[sizeof(file_lib)-1] = '\0';
+#endif
 
   file = fopen(filename, "r");
+#ifdef ELKS
+  if (file == NULL)
+    {
+      file = fopen(file_lib, "r");
+    }
+#endif
   if (file == NULL)
     {
       (void) sprintf (tmp_str, "Can not find help file \"%s\".\n", filename);

@@ -246,6 +246,7 @@ some of the system defines set up here.
 
 #else
 #ifdef ELKS
+#define MORIA_LIB	"/lib/"
 #define MORIA_SAV	"morisave"
 #define MORIA_MOR	"./morifile/newselks"
 #define MORIA_GPL	"./morifile/license"
