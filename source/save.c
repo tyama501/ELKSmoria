@@ -1026,9 +1026,9 @@ int *generate;
 	  rd_short((int16u *)&noscore);
 	  rd_shorts(player_hp, MAX_PLAYER_LEVEL);
 
+#ifndef ELKS
 	  if ((version_min >= 2)
 	      || (version_min == 1 && patch_level >= 3))
-#ifndef ELKS
 	    for (i = 0; i < MAX_STORES; i++)
 	      {
 		st_ptr = &store[i];
