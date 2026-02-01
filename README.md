@@ -18,7 +18,7 @@ Please place the following files under the morifile directory of the current dir
 
 or  
 
-/lib/morifile/license
+/lib/morifile/license  
 /lib/morifile/newselks  
 /lib/morifile/origcmds  
 /lib/morifile/roglcmds  
