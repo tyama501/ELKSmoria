@@ -1,7 +1,7 @@
 # ELKSmoria
 This fork repository is to make a roguelike game for ELKS based on UMoria 5.6 and it is just started.  
 ELKS is the Embeddable Linux Kernel Subset in the following repository.  
-https://github.com/jbruchon/elks
+https://github.com/ghaerr/elks
 
 To play the game with the limited size of the memory,  
 great amount of shrink is needed.
@@ -9,12 +9,19 @@ great amount of shrink is needed.
 Now I am triying to create a Warrior only game with a few treasures on the field without shops.
 
 ## How to play
-Please place the following files under the morifile directory of the current directory.
+Please place the following files under the morifile directory of the current directory or /lib on ELKS.
 
 ./morifile/license  
 ./morifile/newselks  
 ./morifile/origcmds  
 ./morifile/roglcmds  
+
+or  
+
+/lib/morifile/license
+/lib/morifile/newselks  
+/lib/morifile/origcmds  
+/lib/morifile/roglcmds  
 
 morisave and moriscor files are also created under the current directory after save the game.
 
@@ -45,11 +52,11 @@ ELKS repository and OpenWatcom are needed to build.
 Set $TOPDIR by env.sh in the ELKS repository.  
 Set $WATCOM by wcenv.sh in the libc of the ELKS repository.  
 
-cd ../elks_repo  
+Change directory to the ELKS repository, then  
 . ./env.sh  
-cd ../elks_repo/libc  
+cd libc  
 . ./wcenv.sh  
-cd ../../ELKSmoria  
+Change directory to the ELKSmoria repository, then  
 make clean  
 make  
 
