@@ -302,6 +302,13 @@ int show_player;
   if (feof (highscore_fp))
     /* An empty score file. */
     ;
+#ifdef ELKS
+  else if ((version_maj != CUR_VERSION_MAJ)
+	   || (version_min != CUR_VERSION_MIN))
+    {
+      msg_print("Sorry. This scorefile is from a different version of \
+ELKSmoria.");
+#else
   else if ((version_maj != CUR_VERSION_MAJ)
 	   || (version_min > CUR_VERSION_MIN)
 	   || (version_min == CUR_VERSION_MIN && patch_level > PATCH_LEVEL)
@@ -310,6 +317,7 @@ int show_player;
     {
       msg_print("Sorry. This scorefile is from a different version of \
 umoria.");
+#endif
       msg_print (CNIL);
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(ELKS)
       (void) fclose (highscore_fp);
@@ -422,6 +430,13 @@ int duplicate_character ()
   if (feof (highscore_fp))
     /* An empty score file.  */
     return FALSE;
+#ifdef ELKS
+  if ((version_maj != CUR_VERSION_MAJ)
+      || (version_min != CUR_VERSION_MIN))
+    {
+      msg_print("Sorry. This scorefile is from a different version of \
+ELKSmoria.");
+#else
   if ((version_maj != CUR_VERSION_MAJ)
       || (version_min > CUR_VERSION_MIN)
       || (version_min == CUR_VERSION_MIN && patch_level > PATCH_LEVEL)
@@ -430,6 +445,7 @@ int duplicate_character ()
     {
       msg_print("Sorry. This scorefile is from a different version of \
 umoria.");
+#endif
       msg_print (CNIL);
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(APOLLO)|| defined(ELKS)
       (void) fclose (highscore_fp);
@@ -776,6 +792,11 @@ are not saved.");
       (void) fseek(highscore_fp, (off_t)0, L_INCR);
 #endif
     }
+#ifdef ELKS
+  else if ((version_maj != CUR_VERSION_MAJ)
+	   || (version_min != CUR_VERSION_MIN))
+    {
+#else
   /* Support score files from 5.2.2 to present.  */
   else if ((version_maj != CUR_VERSION_MAJ)
 	   || (version_min > CUR_VERSION_MIN)
@@ -783,6 +804,7 @@ are not saved.");
 	   || (version_min == 2 && patch_level < 2)
 	   || (version_min < 2))
     {
+#endif
       /* No need to print a message, a subsequent call to display_scores()
 	 will print a message.  */
 #if defined(MSDOS) || defined(VMS) || defined(AMIGA) || defined(MAC) || defined(ELKS)

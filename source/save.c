@@ -801,6 +801,11 @@ int *generate;
 #ifdef ELKS
       if ((version_maj != CUR_VERSION_MAJ)
 	  || (version_min != CUR_VERSION_MIN))
+	{
+	  prt("Sorry. This savefile is from a different version of ELKSmoria.",
+	      2, 0);
+	  goto error;
+	}
 #else
       /* COMPAT support savefiles from 5.0.14 to 5.0.17 */
       /* support savefiles from 5.1.0 to present */
@@ -813,12 +818,12 @@ int *generate;
 	  || (version_min == CUR_VERSION_MIN && patch_level > PATCH_LEVEL)
 #endif
 	  || (version_min == 0 && patch_level < 14))
-#endif
 	{
 	  prt("Sorry. This savefile is from a different version of umoria.",
 	      2, 0);
 	  goto error;
 	}
+#endif
 
 #ifndef ELKS
       rd_short(&int16u_tmp);
@@ -1206,9 +1211,9 @@ int *generate;
 
       *generate = FALSE;  /* We have restored a cave - no need to generate. */
 
+#ifndef ELKS
       if ((version_min == 1 && patch_level < 3)
 	  || (version_min == 0))
-#ifndef ELKS
 	for (i = 0; i < MAX_STORES; i++)
 	  {
 	    st_ptr = &store[i];
