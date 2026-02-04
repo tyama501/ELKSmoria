@@ -798,6 +798,10 @@ int *generate;
       xor_byte = 0;
       rd_byte(&xor_byte);
 
+#ifdef ELKS
+      if ((version_maj != CUR_VERSION_MAJ)
+	  || (version_min != CUR_VERSION_MIN))
+#else
       /* COMPAT support savefiles from 5.0.14 to 5.0.17 */
       /* support savefiles from 5.1.0 to present */
       if ((version_maj != CUR_VERSION_MAJ)
@@ -809,6 +813,7 @@ int *generate;
 	  || (version_min == CUR_VERSION_MIN && patch_level > PATCH_LEVEL)
 #endif
 	  || (version_min == 0 && patch_level < 14))
+#endif
 	{
 	  prt("Sorry. This savefile is from a different version of umoria.",
 	      2, 0);
