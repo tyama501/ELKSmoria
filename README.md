@@ -6,28 +6,29 @@ https://github.com/ghaerr/elks
 To play the game with the limited size of the memory,  
 great amount of shrink is needed.
 
-Now I am triying to create a Warrior only game with a few treasures on the field without shops.
+Now I am triying to make a Warrior only game with a few treasures on the field without shops.
 
 ## How to play
-Please place the following files under the morifile directory of the current directory or /lib on ELKS.
+For elksmoria_0.3.1 and above,  
+please place the following files under the current directory or /lib/moria on ELKS.
 
-./morifile/license  
-./morifile/newselks  
-./morifile/origcmds  
-./morifile/roglcmds  
+./license  
+./newselks  
+./origcmds  
+./roglcmds  
 
 or  
 
-/lib/morifile/license  
-/lib/morifile/newselks  
-/lib/morifile/origcmds  
-/lib/morifile/roglcmds  
+/lib/moria/license  
+/lib/moria/newselks  
+/lib/moria/origcmds  
+/lib/moria/roglcmds  
 
 morisave and moriscor files are also created under the current directory after save the game.
 
 When starting the new game, you can select whether you use the Umoria original key or Rougue key.  
-./elksmori without option will start the game with the former key which use numeric key(1-9) to move.  
-./elksmori -r will start the game with the latter key which use "hjklyubn." key to move.  
+./moria without option will start the game with the former key which use numeric key(1-9) to move.  
+./moria -r will start the game with the latter key which use "hjklyubn." key to move.  
 
 You can see the help file for keys by hitting "?" after creating character and starting the game.  
 Also, you can see what the character on the screen means by hitting "/" then the character.  

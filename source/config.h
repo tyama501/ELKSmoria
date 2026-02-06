@@ -246,13 +246,13 @@ some of the system defines set up here.
 
 #else
 #ifdef ELKS
-#define MORIA_LIB	"/lib/"
+#define MORIA_LIB	"/lib/moria/"
 #define MORIA_SAV	"morisave"
-#define MORIA_MOR	"./morifile/newselks"
-#define MORIA_GPL	"./morifile/license"
+#define MORIA_MOR	"./newselks"
+#define MORIA_GPL	"./license"
 #define MORIA_TOP	"moriscor"
-#define MORIA_HELP	"./morifile/roglcmds"
-#define MORIA_ORIG_HELP	"./morifile/origcmds"
+#define MORIA_HELP	"./roglcmds"
+#define MORIA_ORIG_HELP	"./origcmds"
 
 #else
 /* Generic UNIX */

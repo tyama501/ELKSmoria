@@ -13,7 +13,7 @@ include $(BASEDIR)/Makefile-rules
 LOCALFLAGS = -DELKS=1 -DELKS_WARRIOR -zt1024
 INCLUDES += -I./source -I./elks
 
-PRGS = elksmori.os2
+PRGS = moria
 
 #TUILIB = tty.obj runes.obj unikey.obj
 TUILIB = elks/tty.obj elks/unikey.obj
