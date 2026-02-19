@@ -10,7 +10,7 @@ include $(BASEDIR)/Makefile-rules
 
 ###############################################################################
 
-LOCALFLAGS = -DELKS=1 -DELKS_WARRIOR -zt1024
+LOCALFLAGS = -DLINT_ARGS -DELKS=1 -DELKS_WARRIOR -zt1024
 INCLUDES += -I./source -I./elks
 
 PRGS = moria

@@ -638,7 +638,11 @@ int set_lightning_destroy(inven_type *);
 int set_null(inven_type *);
 int set_acid_destroy(inven_type *);
 int set_fire_destroy(inven_type *);
+#ifdef ELKS
+int set_large(treasure_type *);
+#else
 int set_large(inven_type *);
+#endif
 int general_store(int);
 int armory(int);
 int weaponsmith(int);
