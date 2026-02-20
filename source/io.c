@@ -1406,7 +1406,12 @@ char *prompt;
 #ifdef MAC
   GetScreenCursor(&x, &y);
 #else
+#ifdef ELKS
+  x = 0;
+  y = 0;
+#else
   getyx(stdscr, y, x);
+#endif
 #if defined(lint)
   /* prevent message 'warning: y is unused' */
   x = y;

@@ -241,7 +241,11 @@ int f, l;
       if (stat(lockname, &sbuf) < 0)
 	return -1;
       /* Locks which last more than 10 seconds get deleted. */
+#ifdef ELKS
+      if (time((time_t *)0) - sbuf.st_mtime > 10)
+#else
       if (time((long *)0) - sbuf.st_mtime > 10)
+#endif
 	{
 	  if (unlink(lockname) < 0)
 	    return -1;

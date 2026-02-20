@@ -116,7 +116,6 @@ void wbkgdset(WINDOW *w, int a);
 void mvprintw(int y, int x, const char *fmt, ...);
 
 // T.Yamada modified
-void getyx(WINDOW *, int, int);
 int overwrite(WINDOW *, WINDOW *);
 int mvaddstr(int,int, char *);
 int addstr(char *);

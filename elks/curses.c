@@ -114,10 +114,6 @@ void printw(char *fmt, ...)
 }
 
 // T.Yamada modified
-void getyx(WINDOW *win, int y, int x)
-{
-}
-
 int overwrite(WINDOW *srcwin, WINDOW *dstwin)
 {
     return OK;

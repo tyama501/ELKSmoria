@@ -186,7 +186,11 @@ int y, x, must_be_small;
 
 /* Allocates an object for tunnels and rooms		-RAK-	*/
 void alloc_object(alloc_set, typ, num)
+#ifdef ELKS
+int (*alloc_set)(int);
+#else
 int (*alloc_set)();
+#endif
 int typ, num;
 {
   register int i, j, k;
@@ -1316,7 +1320,11 @@ register int item_val, drop_all;
 
 /* Destroys a type of item on a given percent chance	-RAK-	*/
 int inven_damage(typ, perc)
+#ifdef ELKS
+int (*typ)(inven_type *);
+#else
 int (*typ)();
+#endif
 register int perc;
 {
   register int i, j;

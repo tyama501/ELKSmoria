@@ -911,8 +911,8 @@ int monptr;
 #ifndef ELKS
 	      if (visible && !death && randint(4) == 1)
 		c_recall[m_ptr->mptr].r_cdefense |= r_ptr->cdefense &
-#endif
 		  CD_NO_SLEEP;
+#endif
 	    }
 
 #ifndef ELKS
