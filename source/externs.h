@@ -396,7 +396,11 @@ void panel_bounds(void);
 int get_panel(int, int, int);
 int panel_contains(int, int);
 int distance(int, int, int, int);
+#ifdef ELKS
+int next_to_walls(int, int);
+#else
 int next_to_wall(int, int);
+#endif
 int next_to_corr(int, int);
 int damroll(int, int);
 int pdamroll(unsigned char *);

@@ -29,6 +29,7 @@
 #include "constant.h"
 
 #ifdef ELKS
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #endif
@@ -101,12 +102,14 @@ typedef struct { int stuff; } fpvmach;
 #endif
 
 #ifndef VMS
+#ifndef ELKS
 #ifdef USG
 void exit();
 #ifdef __TURBOC__
 void sleep();
 #else
 unsigned sleep();
+#endif
 #endif
 #endif
 #endif

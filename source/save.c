@@ -118,7 +118,11 @@ static void rd_monster();
 #ifdef MAC
 #include <time.h>
 #else
+#ifdef ELKS
+#include <time.h>
+#else
 long time();
+#endif
 #endif
 #else
 char *malloc();
@@ -355,7 +359,11 @@ static int sv_write()
 #ifdef MAC
   l = time((time_t *)0);
 #else
+#ifdef ELKS
+  l = time((time_t *)0);
+#else
   l = time((long *)0);
+#endif
 #endif
   if (l < start_time)
     {
@@ -1078,7 +1086,11 @@ int *generate;
 #ifdef MAC
 	    birth_date = time((time_t *)0);
 #else
+#ifdef ELKS
+	    birth_date = time((time_t *)0);
+#else
 	    birth_date = time((long *)0);
+#endif
 #endif
 	}
       if ((c = getc(fileptr)) == EOF || (l & 0x80000000L))
@@ -1304,7 +1316,11 @@ scoreboard; it will not be scored again.");
 #ifdef MAC
 	      start_time = time((time_t *)0);
 #else
+#ifdef ELKS
+	      start_time = time((time_t *)0);
+#else
 	      start_time = time((long *)0);
+#endif
 #endif
 	      /* check for reasonable values of time here ... */
 	      if (start_time < time_saved)

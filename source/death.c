@@ -113,8 +113,10 @@ off_t lseek();
 
 #ifndef VMS
 #ifndef MAC
+#ifndef ELKS
 #if defined(ultrix) || defined(USG)
 void exit ();
+#endif
 #endif
 #endif
 #endif
@@ -132,6 +134,7 @@ static void kingly(void);
 #endif
 
 #ifdef ELKS
+#include <stdlib.h>
 #include <unistd.h>
 #endif
 
