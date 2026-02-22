@@ -43,7 +43,7 @@ some of the system defines set up there.
 #ifdef ELKS
 #define CUR_VERSION_MAJ 0 /* version 0.3.0 */
 #define CUR_VERSION_MIN 3
-#define PATCH_LEVEL 1
+#define PATCH_LEVEL 2
 #else
 #define CUR_VERSION_MAJ 5 /* version 5.5.2 */
 #define CUR_VERSION_MIN 5
